@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { products as initialProducts } from '../data/products';
 
-const API_BASE = 'http://localhost:9000/api';
+const API_BASE = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : 'http://localhost:9000/api';
 
 const ProductContext = createContext(null);
 

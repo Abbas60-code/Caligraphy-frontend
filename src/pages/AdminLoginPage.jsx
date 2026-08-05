@@ -13,7 +13,8 @@ export default function AdminLoginPage({ onLogin }) {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:9000/api/admin/login', {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:9000';
+      const response = await fetch(`${apiBase}/api/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

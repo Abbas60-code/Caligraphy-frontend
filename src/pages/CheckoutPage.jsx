@@ -43,9 +43,9 @@ export default function CheckoutPage() {
       items: items.map(item => ({ title: item.title, quantity: item.quantity, price: item.price })),
     });
 
-    // Send email notification to admin (fire & forget — don't block on failure)
+    const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:9000';
     try {
-      await fetch('http://localhost:9000/api/orders/notify', {
+      await fetch(`${apiBase}/api/orders/notify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
