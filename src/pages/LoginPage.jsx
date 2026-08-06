@@ -78,12 +78,12 @@ function AuthInput({ id, label, type = 'text', name, value, onChange, placeholde
 
 /* ═══════════════════════════════════════════════════════════ */
 export default function LoginPage() {
-  const [mode, setMode] = useState('login'); // 'login' | 'signup'
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
+  const [mode, setMode] = useState('login'); // 'login' | 'signup' | 'forgot' | 'reset'
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', code: '' });
   const [successMsg, setSuccessMsg] = useState('');
   const [localError, setLocalError] = useState('');
 
-  const { login, register, socialLogin, loading, error, clearError, isLoggedIn } = useAuth();
+  const { login, register, socialLogin, forgotPassword, resetPassword, loading, error, clearError, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   // Redirect if already logged in
@@ -101,7 +101,7 @@ export default function LoginPage() {
 
   const switchMode = (m) => {
     setMode(m);
-    setForm({ name: '', email: '', password: '', confirm: '' });
+    setForm({ name: '', email: '', password: '', confirm: '', code: '' });
     clearError();
     setLocalError('');
     setSuccessMsg('');
@@ -132,11 +132,41 @@ export default function LoginPage() {
         setSuccessMsg('Account created! Welcome to ArtGallery.');
         setTimeout(() => navigate('/'), 1500);
       }
-    } else {
+    } else if (mode === 'login') {
       const ok = await login({ email: form.email, password: form.password });
       if (ok) {
         setSuccessMsg('Welcome back!');
         setTimeout(() => navigate('/'), 1000);
+      }
+    } else if (mode === 'forgot') {
+      const ok = await forgotPassword({ email: form.email });
+      if (ok) {
+        setSuccessMsg('Verification code sent to your email.');
+        setTimeout(() => {
+          setMode('reset');
+          setSuccessMsg('');
+        }, 1500);
+      }
+    } else if (mode === 'reset') {
+      if (form.password !== form.confirm) {
+        setLocalError('Passwords do not match.');
+        return;
+      }
+      if (form.password.length < 6) {
+        setLocalError('Password must be at least 6 characters.');
+        return;
+      }
+      const ok = await resetPassword({
+        email: form.email,
+        code: form.code,
+        password: form.password,
+        password_confirmation: form.confirm,
+      });
+      if (ok) {
+        setSuccessMsg('Password reset successful! Please sign in.');
+        setTimeout(() => {
+          switchMode('login');
+        }, 2000);
       }
     }
   };
@@ -197,7 +227,7 @@ export default function LoginPage() {
             color: 'rgba(255,255,255,0.4)', fontSize: '13px',
             fontFamily: 'Inter, sans-serif', marginTop: '8px',
           }}>
-            {mode === 'login' ? 'Welcome back, sign in to your account' : 'Create your free account'}
+            {mode === 'login' ? 'Welcome back, sign in to your account' : mode === 'signup' ? 'Create your free account' : mode === 'forgot' ? 'Enter your email to request a reset code' : 'Enter the code and set your new password'}
           </p>
         </div>
 
@@ -211,27 +241,43 @@ export default function LoginPage() {
         }}>
 
           {/* Tabs */}
-          <div style={{ display: 'flex', marginBottom: '32px', borderBottom: '1px solid #E8DFC8' }}>
-            {['login', 'signup'].map(tab => (
-              <button
-                key={tab}
-                id={`${tab}-tab`}
-                onClick={() => switchMode(tab)}
-                style={{
-                  flex: 1,
-                  paddingBottom: '12px',
-                  background: 'transparent', border: 'none',
-                  borderBottom: mode === tab ? '2px solid #C9A84C' : '2px solid transparent',
-                  color: mode === tab ? '#C9A84C' : '#8A7A6A',
-                  fontFamily: 'Inter, sans-serif', fontWeight: 700,
-                  fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase',
-                  cursor: 'pointer', transition: 'all 0.25s',
-                }}
-              >
-                {tab === 'login' ? 'Sign In' : 'Register'}
-              </button>
-            ))}
-          </div>
+          {['login', 'signup'].includes(mode) && (
+            <div style={{ display: 'flex', marginBottom: '32px', borderBottom: '1px solid #E8DFC8' }}>
+              {['login', 'signup'].map(tab => (
+                <button
+                  key={tab}
+                  id={`${tab}-tab`}
+                  onClick={() => switchMode(tab)}
+                  style={{
+                    flex: 1,
+                    paddingBottom: '12px',
+                    background: 'transparent', border: 'none',
+                    borderBottom: mode === tab ? '2px solid #C9A84C' : '2px solid transparent',
+                    color: mode === tab ? '#C9A84C' : '#8A7A6A',
+                    fontFamily: 'Inter, sans-serif', fontWeight: 700,
+                    fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase',
+                    cursor: 'pointer', transition: 'all 0.25s',
+                  }}
+                >
+                  {tab === 'login' ? 'Sign In' : 'Register'}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Title for Forgot/Reset */}
+          {['forgot', 'reset'].includes(mode) && (
+            <div style={{ marginBottom: '24px', textAlign: 'center' }}>
+              <h2 style={{
+                fontFamily: "Georgia, serif",
+                fontSize: '20px',
+                color: '#1A1A1A',
+                margin: 0,
+              }}>
+                {mode === 'forgot' ? 'Forgot Password' : 'Set New Password'}
+              </h2>
+            </div>
+          )}
 
           {/* Success Message */}
           {successMsg && (
@@ -269,19 +315,32 @@ export default function LoginPage() {
               />
             )}
 
-            <AuthInput
-              id="auth-email" name="email" type="email" label="Email Address"
-              value={form.email} onChange={handleChange}
-              placeholder="you@example.com" required
-            />
+            {(mode === 'signup' || mode === 'login' || mode === 'forgot' || mode === 'reset') && (
+              <AuthInput
+                id="auth-email" name="email" type="email" label="Email Address"
+                value={form.email} onChange={handleChange}
+                placeholder="you@example.com" required
+                disabled={mode === 'reset'}
+              />
+            )}
 
-            <AuthInput
-              id="auth-password" name="password" type="password" label="Password"
-              value={form.password} onChange={handleChange}
-              placeholder="••••••••" required
-            />
+            {mode === 'reset' && (
+              <AuthInput
+                id="auth-code" name="code" type="text" label="Verification Code"
+                value={form.code} onChange={handleChange}
+                placeholder="6-digit code" required
+              />
+            )}
 
-            {mode === 'signup' && (
+            {(mode === 'signup' || mode === 'login' || mode === 'reset') && (
+              <AuthInput
+                id="auth-password" name="password" type="password" label={mode === 'reset' ? 'New Password' : 'Password'}
+                value={form.password} onChange={handleChange}
+                placeholder="••••••••" required
+              />
+            )}
+
+            {(mode === 'signup' || mode === 'reset') && (
               <AuthInput
                 id="signup-confirm" name="confirm" type="password" label="Confirm Password"
                 value={form.confirm} onChange={handleChange}
@@ -291,11 +350,22 @@ export default function LoginPage() {
 
             {mode === 'login' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-8px' }}>
-                <a href="#" style={{
+                <a href="#" onClick={(e) => { e.preventDefault(); switchMode('forgot'); }} style={{
                   fontSize: '13px', fontFamily: 'Inter, sans-serif',
                   color: '#C9A84C', textDecoration: 'none',
                 }}>
                   Forgot password?
+                </a>
+              </div>
+            )}
+
+            {['forgot', 'reset'].includes(mode) && (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-8px' }}>
+                <a href="#" onClick={(e) => { e.preventDefault(); switchMode('login'); }} style={{
+                  fontSize: '13px', fontFamily: 'Inter, sans-serif',
+                  color: '#C9A84C', textDecoration: 'none',
+                }}>
+                  Back to Sign In
                 </a>
               </div>
             )}
@@ -323,10 +393,10 @@ export default function LoginPage() {
                     borderTopColor: 'transparent', borderRadius: '50%',
                     display: 'inline-block', animation: 'spin 0.8s linear infinite',
                   }} />
-                  {mode === 'login' ? 'Signing In...' : 'Creating Account...'}
+                  {mode === 'login' ? 'Signing In...' : mode === 'signup' ? 'Creating Account...' : mode === 'forgot' ? 'Sending Code...' : 'Resetting Password...'}
                 </>
               ) : (
-                mode === 'login' ? 'Sign In' : 'Create Account'
+                mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : mode === 'forgot' ? 'Send Code' : 'Reset Password'
               )}
             </button>
           </form>

@@ -138,6 +138,54 @@ export function AuthProvider({ children }) {
     setToken(null);
   }, [token]);
 
+  /** ── Forgot Password ────────────────────────── */
+  const forgotPassword = useCallback(async ({ email }) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_BASE}/customer/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setError(data.message || 'Forgot password request failed.');
+        return false;
+      }
+      return true;
+    } catch {
+      setError('Network error. Please try again.');
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  /** ── Reset Password ─────────────────────────── */
+  const resetPassword = useCallback(async ({ email, code, password, password_confirmation }) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_BASE}/customer/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email, code, password, password_confirmation }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setError(data.message || 'Password reset failed.');
+        return false;
+      }
+      return true;
+    } catch {
+      setError('Network error. Please try again.');
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -150,6 +198,8 @@ export function AuthProvider({ children }) {
         login,
         socialLogin,
         logout,
+        forgotPassword,
+        resetPassword,
         clearError,
       }}
     >
