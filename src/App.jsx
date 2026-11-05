@@ -19,7 +19,6 @@ function Layout({ children, hideFooter }) {
   return (
     <>
       <Navbar />
-      <CartDrawer />
       <main>{children}</main>
       {!hideFooter && <Footer />}
     </>

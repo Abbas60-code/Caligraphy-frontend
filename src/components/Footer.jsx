@@ -71,7 +71,6 @@ export default function Footer() {
                 { label: 'About the Artist', to: '/about' },
                 { label: 'Contact Us', to: '/contact' },
                 { label: 'Custom Orders', to: '/contact' },
-                { label: 'Cart', to: '/cart' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link

@@ -8,7 +8,7 @@ import { getOptimizedImageUrl } from '../utils/image';
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addItem, setIsCartOpen } = useCart();
+  const { addItem } = useCart();
   const { products } = useProducts();
 
   const product = products.find((p) => String(p.id) === String(id) || String(p._id) === String(id));
@@ -16,7 +16,6 @@ export default function ProductPage() {
 
   const [activeImage, setActiveImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
   const [zoomed, setZoomed] = useState(false);
 
   if (!product) {
@@ -36,14 +35,10 @@ export default function ProductPage() {
 
   const images = product.images && product.images.length > 0 ? product.images : (product.image ? [product.image] : []);
 
-  const handleAddToCart = () => {
-    addItem(product, quantity);
-    setAddedToCart(true);
-    setIsCartOpen(true); // Open cart immediately
-    setTimeout(() => { setAddedToCart(false); }, 900);
+  const handleBuyNow = () => {
+    if (addItem) addItem(product, quantity);
+    navigate('/checkout');
   };
-
-  const handleBuyNow = () => { addItem(product, quantity); navigate('/checkout'); };
 
   const whatsappMsg = encodeURIComponent(
     `Hello! I'm interested in the original artwork: "${product.title}" (${product.artMovement || 'Fine Art'})\nPrice: $${product.price}\nDimensions: ${product.dimensions || 'N/A'}`
@@ -317,46 +312,32 @@ export default function ProductPage() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="product-actions-responsive" style={{ marginBottom: '16px' }}>
-              <button
-                onClick={handleAddToCart}
-                style={{
-                  flex: 1, height: '56px',
-                  background: addedToCart ? '#C9A84C' : '#1A1A1A',
-                  color: addedToCart ? '#1A1A1A' : '#fff',
-                  border: 'none', cursor: 'pointer',
-                  fontFamily: 'Inter, sans-serif', fontWeight: 700,
-                  fontSize: '12px', letterSpacing: '2.5px', textTransform: 'uppercase',
-                  transition: 'all 0.3s',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                }}
-                onMouseEnter={e => { if (!addedToCart) { e.currentTarget.style.background = '#C9A84C'; e.currentTarget.style.color = '#1A1A1A'; } }}
-                onMouseLeave={e => { if (!addedToCart) { e.currentTarget.style.background = '#1A1A1A'; e.currentTarget.style.color = '#fff'; } }}
-              >
-                {addedToCart ? (
-                  <>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    Added!
-                  </>
-                ) : 'Add to Cart'}
-              </button>
+            <div style={{ marginBottom: '16px' }}>
               <button
                 onClick={handleBuyNow}
                 style={{
-                  flex: 1, height: '56px',
-                  background: '#fff',
+                  width: '100%',
+                  height: '56px',
+                  background: '#C9A84C',
                   color: '#1A1A1A',
-                  border: '2px solid #D4C4A0', cursor: 'pointer',
-                  fontFamily: 'Inter, sans-serif', fontWeight: 700,
-                  fontSize: '12px', letterSpacing: '2.5px', textTransform: 'uppercase',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '13px',
+                  letterSpacing: '2.5px',
+                  textTransform: 'uppercase',
                   transition: 'all 0.3s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  boxShadow: '0 6px 20px rgba(201,168,76,0.25)',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#C9A84C'; e.currentTarget.style.color = '#C9A84C'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#D4C4A0'; e.currentTarget.style.color = '#1A1A1A'; }}
+                onMouseEnter={e => e.currentTarget.style.background = '#E8C97E'}
+                onMouseLeave={e => e.currentTarget.style.background = '#C9A84C'}
               >
-                Buy Now
+                Proceed to Checkout →
               </button>
             </div>
 

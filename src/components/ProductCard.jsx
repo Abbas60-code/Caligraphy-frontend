@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 import { getOptimizedImageUrl } from '../utils/image';
 
 function StarRating({ rating }) {
@@ -23,24 +22,6 @@ function StarRating({ rating }) {
 
 export default function ProductCard({ product, index = 0 }) {
   const [hovered, setHovered] = useState(false);
-  const [addedToCart, setAddedToCart] = useState(false);
-  const { addItem, setIsCartOpen } = useCart();
-  const navigate = useNavigate();
-
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    addItem(product);
-    setAddedToCart(true);
-    setIsCartOpen(true); // Open cart immediately
-    setTimeout(() => setAddedToCart(false), 2000);
-  };
-
-  const handleQuickView = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigate(`/product/${product.id}`);
-  };
 
   return (
     <div
@@ -74,53 +55,30 @@ export default function ProductCard({ product, index = 0 }) {
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'rgba(0,0,0,0.45)',
+              background: 'rgba(0,0,0,0.4)',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '10px',
               opacity: hovered ? 1 : 0,
               transition: 'opacity 0.3s ease',
             }}
           >
-            <button
-              onClick={handleQuickView}
+            <span
               style={{
-                padding: '10px 20px',
-                background: '#ffffff',
+                padding: '12px 24px',
+                background: '#C9A84C',
                 color: '#1A1A1A',
                 fontSize: '11px',
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: 700,
-                letterSpacing: '2px',
+                letterSpacing: '2.5px',
                 textTransform: 'uppercase',
-                border: 'none',
-                cursor: 'pointer',
-                width: '150px',
+                display: 'inline-block',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
               }}
             >
-              Quick View
-            </button>
-            <button
-              onClick={handleAddToCart}
-              style={{
-                padding: '10px 20px',
-                background: addedToCart ? '#22c55e' : '#C9A84C',
-                color: '#1A1A1A',
-                fontSize: '11px',
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 700,
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-                border: 'none',
-                cursor: 'pointer',
-                width: '150px',
-                transition: 'background 0.3s',
-              }}
-            >
-              {addedToCart ? '✓ Added' : 'Add to Cart'}
-            </button>
+              View Artwork →
+            </span>
           </div>
 
           {/* Badges */}

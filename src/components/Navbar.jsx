@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { itemCount, setIsCartOpen } = useCart();
   const { user, isLoggedIn, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -251,32 +249,6 @@ export default function Navbar() {
                 Sign In
               </Link>
             )}
-
-            {/* Cart Icon */}
-            <button
-              id="navbar-cart-btn"
-              onClick={() => setIsCartOpen(true)}
-              style={{
-                background: 'transparent', border: 'none', cursor: 'pointer',
-                position: 'relative', color: 'rgba(255, 255, 255, 0.85)', padding: '6px',
-              }}
-            >
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"
-                />
-              </svg>
-              {itemCount > 0 && (
-                <span style={{
-                  position: 'absolute', top: '-2px', right: '-2px',
-                  background: '#C9A84C', color: '#1A1A1A', fontSize: '11px', fontWeight: 700,
-                  width: '18px', height: '18px', borderRadius: '50%',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  {itemCount}
-                </span>
-              )}
-            </button>
 
             {/* Hamburger (Mobile) */}
             <button
