@@ -37,9 +37,9 @@ export default function Navbar() {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/gallery', label: 'Gallery' },
-    { to: '/about', label: 'About' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/gallery', label: 'Collections' },
+    { to: '/about', label: 'The Artist' },
+    { to: '/contact', label: 'Commissions' },
   ];
 
   const isActive = (path) =>
@@ -75,18 +75,29 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none' }}>
-            <span style={{
-              fontSize: '11px', letterSpacing: '5px', textTransform: 'uppercase',
-              color: '#C9A84C', fontFamily: 'Inter, sans-serif', fontWeight: 500, lineHeight: 1.2,
-            }}>
-              بسم الله
-            </span>
-            <span style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: '22px', fontWeight: 700, color: '#ffffff', lineHeight: 1.2, marginTop: '2px',
-            }}>
-              ArtGallery
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{
+                fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase',
+                color: '#C9A84C', fontFamily: 'Inter, sans-serif', fontWeight: 600, lineHeight: 1.1,
+              }}>
+                FINE ART ATELIER
+              </span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '3px' }}>
+              <span style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: '22px', fontWeight: 800, color: '#ffffff', letterSpacing: '1px', lineHeight: 1,
+              }}>
+                AMIR
+              </span>
+              <span style={{
+                fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.7)', fontFamily: 'Inter, sans-serif', fontWeight: 300,
+                borderLeft: '1px solid #C9A84C', paddingLeft: '8px',
+              }}>
+                STUDIO & GALLERY
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav Links */}

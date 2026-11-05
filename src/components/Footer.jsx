@@ -28,7 +28,7 @@ export default function Footer() {
                 fontFamily: 'Inter, sans-serif',
                 marginBottom: '6px',
               }}>
-                بسم الله الرحمن الرحيم
+                Multidisciplinary Fine Art
               </p>
               <h3 style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
@@ -37,7 +37,7 @@ export default function Footer() {
                 color: '#ffffff',
                 marginBottom: '8px',
               }}>
-                ArtGallery
+                Amir Fine Art Studio
               </h3>
               <div style={{ height: '1px', width: '48px', background: '#C9A84C' }} />
             </div>
@@ -47,7 +47,7 @@ export default function Footer() {
               fontSize: '15px',
               lineHeight: 1.7,
             }}>
-              Timeless Islamic calligraphy, crafted with passion and devotion. Each piece tells a story of faith, beauty, and tradition.
+              Curating original fine art across Abstract Expressionism, Modernist Cubism, classical Miniature painting, and sacred Islamic Calligraphy. Hand-painted with archival excellence for international collectors.
             </p>
           </div>
 
@@ -103,19 +103,20 @@ export default function Footer() {
               fontWeight: 600,
               marginBottom: '24px',
             }}>
-              Collections
+              Art Movements
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
-                "Allah's Names",
-                "Quranic Verses",
-                "Arabic Calligraphy",
-                "Modern Islamic Art",
-                "Custom Paintings",
+                { name: 'Abstract Expressionism', id: 'abstract' },
+                { name: 'Cubism & Geometry', id: 'cubism' },
+                { name: 'Miniature Painting', id: 'miniature' },
+                { name: 'Islamic Calligraphy', id: 'calligraphy' },
+                { name: 'Contemporary Fusion', id: 'modern-fusion' },
+                { name: 'Bespoke Commissions', id: 'custom' },
               ].map((cat) => (
-                <li key={cat}>
+                <li key={cat.id}>
                   <Link
-                    to="/gallery"
+                    to={`/gallery?category=${cat.id}`}
                     style={{
                       color: 'rgba(255,255,255,0.6)',
                       fontFamily: 'Inter, sans-serif',
@@ -125,7 +126,7 @@ export default function Footer() {
                     }}
                     className="hover:text-[#C9A84C]"
                   >
-                    ✦ {cat}
+                    ✦ {cat.name}
                   </Link>
                 </li>
               ))}
@@ -191,7 +192,7 @@ export default function Footer() {
           justifyContent: 'space-between',
         }} className="footer-bottom-flex">
           <p style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Inter, sans-serif', fontSize: '13px', margin: 0 }}>
-            © {new Date().getFullYear()} ArtGallery. All rights reserved. Crafted with devotion.
+            © {new Date().getFullYear()} Amir Fine Art Studio & Gallery. All rights reserved. Original Fine Art Atelier.
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
             {['Privacy Policy', 'Terms of Service', 'Shipping Policy'].map((item) => (

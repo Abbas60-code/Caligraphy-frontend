@@ -25,7 +25,7 @@ export default function AdminDashboardPage({ onLogout }) {
     arabicTitle: '',
     price: '',
     originalPrice: '',
-    category: 'allah-names',
+    category: 'abstract',
     image: '',
     imageFile: null,
     description: '',
@@ -38,11 +38,17 @@ export default function AdminDashboardPage({ onLogout }) {
   });
 
   const categories = [
-    { id: 'allah-names', label: "Allah's Names" },
-    { id: 'quranic-verses', label: 'Quranic Verses' },
-    { id: 'arabic-calligraphy', label: 'Arabic Calligraphy' },
-    { id: 'modern-islamic', label: 'Modern Islamic Art' },
-    { id: 'custom', label: 'Custom Paintings' },
+    { id: 'abstract', label: 'Abstract Expressionism' },
+    { id: 'cubism', label: 'Cubism & Geometry' },
+    { id: 'miniature', label: 'Miniature Painting' },
+    { id: 'calligraphy', label: 'Islamic Calligraphy' },
+    { id: 'modern-fusion', label: 'Contemporary Fusion' },
+    { id: 'custom', label: 'Bespoke Commissions' },
+    // Legacy support
+    { id: 'allah-names', label: "Allah's Names (Legacy)" },
+    { id: 'quranic-verses', label: 'Quranic Verses (Legacy)' },
+    { id: 'arabic-calligraphy', label: 'Arabic Calligraphy (Legacy)' },
+    { id: 'modern-islamic', label: 'Modern Islamic (Legacy)' },
   ];
 
   const handleOpenAddModal = () => {
@@ -52,7 +58,7 @@ export default function AdminDashboardPage({ onLogout }) {
       arabicTitle: '',
       price: '',
       originalPrice: '',
-      category: 'allah-names',
+      category: 'abstract',
       image: '', 
       imageFile: null,
       description: '',

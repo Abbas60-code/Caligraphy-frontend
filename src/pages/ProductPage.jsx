@@ -46,7 +46,7 @@ export default function ProductPage() {
   const handleBuyNow = () => { addItem(product, quantity); navigate('/checkout'); };
 
   const whatsappMsg = encodeURIComponent(
-    `Hello! I'm interested in: ${product.title}\nPrice: $${product.price}\nQty: ${quantity}`
+    `Hello! I'm interested in the original artwork: "${product.title}" (${product.artMovement || 'Fine Art'})\nPrice: $${product.price}\nDimensions: ${product.dimensions || 'N/A'}`
   );
 
   return (
@@ -154,7 +154,18 @@ export default function ProductPage() {
           <div>
 
             {/* Badges */}
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap', alignItems: 'center' }}>
+              {product.artMovement && (
+                <span style={{
+                  background: '#1A1A1A', color: '#C9A84C',
+                  border: '1px solid rgba(201,168,76,0.3)',
+                  fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: 700,
+                  letterSpacing: '2px', textTransform: 'uppercase',
+                  padding: '6px 14px',
+                }}>
+                  {product.artMovement}
+                </span>
+              )}
               {product.originalPrice && (
                 <span style={{
                   background: '#C9A84C', color: '#1A1A1A',
@@ -249,18 +260,34 @@ export default function ProductPage() {
             }}>
               <div>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#C9A84C', marginBottom: '8px' }}>
-                  Dimensions
+                  Art Movement
                 </p>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', fontWeight: 500 }}>
-                  {product.dimensions || 'Standard'}
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', fontWeight: 600 }}>
+                  {product.artMovement || 'Contemporary Fine Art'}
                 </p>
               </div>
               <div>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#C9A84C', marginBottom: '8px' }}>
-                  Materials
+                  Dimensions
                 </p>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', fontWeight: 500 }}>
-                  {product.materials || 'Premium Canvas'}
+                  {product.dimensions || 'Standard Canvas'}
+                </p>
+              </div>
+              <div>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#C9A84C', marginBottom: '8px' }}>
+                  Medium & Materials
+                </p>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', fontWeight: 500 }}>
+                  {product.materials || 'Archival Canvas & Mineral Pigments'}
+                </p>
+              </div>
+              <div>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#C9A84C', marginBottom: '8px' }}>
+                  Provenance
+                </p>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', fontWeight: 500 }}>
+                  Original signed with wax seal & certificate
                 </p>
               </div>
             </div>
@@ -335,7 +362,7 @@ export default function ProductPage() {
 
             {/* WhatsApp */}
             <a
-              href={`https://wa.me/921234567890?text=${whatsappMsg}`}
+              href={`https://wa.me/923002161412?text=${whatsappMsg}`}
               target="_blank" rel="noopener noreferrer"
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',

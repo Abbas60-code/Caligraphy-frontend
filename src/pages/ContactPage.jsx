@@ -17,11 +17,11 @@ export default function ContactPage() {
   const WHATSAPP_NUMBER = '923002161412';
 
   const getWhatsAppMsg = () => {
-    const name = form.name || 'Visitor';
-    const subject = form.subject || 'General Inquiry';
-    const message = form.message || 'Hello! I would like to inquire about a custom calligraphy painting.';
+    const name = form.name || 'Collector';
+    const subject = form.subject || 'Atelier Inquiry';
+    const message = form.message || 'Hello Amir! I would like to inquire about an original painting / custom art commission.';
     return encodeURIComponent(
-      `Assalamu Alaikum! 🌙\n\nMy name is *${name}*\nSubject: *${subject}*\n\n${message}\n\n📧 ${form.email || ''}`
+      `Hello Amir! 🎨\n\nMy name is *${name}*\nSubject: *${subject}*\n\n${message}\n\n📧 ${form.email || ''}`
     );
   };
 
@@ -391,13 +391,16 @@ export default function ContactPage() {
                         boxSizing: 'border-box',
                       }}
                     >
-                      <option value="">Select a topic</option>
-                      <option value="custom">Custom Commission</option>
-                      <option value="order">Existing Order</option>
-                      <option value="shipping">Shipping & Delivery</option>
-                      <option value="artwork">Artwork Inquiry</option>
-                      <option value="wholesale">Wholesale / Gallery</option>
-                      <option value="other">Other</option>
+                      <option value="">Select an inquiry topic</option>
+                      <option value="Commission - Abstract Art">Commission: Abstract Expressionism Canvas</option>
+                      <option value="Commission - Cubism">Commission: Modernist Cubism Artwork</option>
+                      <option value="Commission - Miniature">Commission: Persian / Mughal Miniature Painting</option>
+                      <option value="Commission - Calligraphy">Commission: Sacred Islamic Calligraphy</option>
+                      <option value="Architectural / Interior Design">Interior Design / Corporate Collection</option>
+                      <option value="Artwork Inquiry">Inquiry About Existing Gallery Piece</option>
+                      <option value="Order & Shipping">Order Status & Insured Shipping</option>
+                      <option value="Private Exhibition">Private Exhibition / Gallery Representation</option>
+                      <option value="Other">Other Inquiry</option>
                     </select>
                   </div>
                   <div>

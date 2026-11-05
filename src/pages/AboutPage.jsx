@@ -6,40 +6,43 @@ export default function AboutPage() {
     <div style={{ background: '#FDFAF3', minHeight: '100vh' }} className="page-enter">
       {/* Header */}
       <div style={{
-        background: '#1A1A1A',
+        background: '#161413',
         padding: '120px 24px 80px',
         position: 'relative',
         overflow: 'hidden',
         textAlign: 'center',
       }}>
-        <div className="arabic-pattern" style={{ position: 'absolute', inset: 0, opacity: 0.1 }} />
-        <div style={{ position: 'relative', zIndex: 10, maxWidth: '800px', margin: '0 auto' }}>
+        <div className="arabic-pattern" style={{ position: 'absolute', inset: 0, opacity: 0.08 }} />
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: '850px', margin: '0 auto' }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px',
-            color: 'rgba(255, 255, 255, 0.4)',
+            color: 'rgba(255, 255, 255, 0.45)',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '13px',
+            fontSize: '12px',
             textTransform: 'uppercase',
             letterSpacing: '2px',
-            marginBottom: '24px',
+            marginBottom: '20px',
           }}>
             <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[#C9A84C]">Home</Link>
             <span>/</span>
-            <span style={{ color: '#C9A84C' }}>About</span>
+            <span style={{ color: '#C9A84C' }}>The Artist</span>
           </div>
+
           <p style={{
             color: '#C9A84C',
             fontSize: '11px',
             letterSpacing: '8px',
             textTransform: 'uppercase',
             fontFamily: 'Inter, sans-serif',
+            fontWeight: 600,
             marginBottom: '16px',
           }}>
-            The Story
+            Atelier Biography
           </p>
+
           <h1 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             fontSize: 'clamp(32px, 5vw, 64px)',
@@ -48,8 +51,9 @@ export default function AboutPage() {
             marginBottom: '24px',
             lineHeight: 1.2,
           }}>
-            A Life Devoted to<br /><em>Sacred Art.</em>
+            A Multidisciplinary Life<br /><em>Dedicated to Fine Art.</em>
           </h1>
+
           <div style={{
             width: '80px',
             height: '2px',
@@ -59,13 +63,13 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Main Story */}
-      <section style={{ padding: '80px 24px' }}>
+      {/* Main Story Section */}
+      <section style={{ padding: '96px 24px' }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '64px',
           alignItems: 'center',
         }}>
@@ -78,49 +82,51 @@ export default function AboutPage() {
               right: '16px',
               bottom: '16px',
               border: '1px solid rgba(201, 168, 76, 0.4)',
-              borderRadius: '8px',
+              borderRadius: '6px',
             }} />
             <img
               src="/artist_portrait.png"
-              alt="Amir – Master Calligrapher"
+              alt="Amir – Multidisciplinary Master Artist"
               style={{
                 width: '100%',
-                maxHeight: '550px',
+                maxHeight: '560px',
                 objectFit: 'cover',
                 objectPosition: 'center 5%',
                 display: 'block',
                 position: 'relative',
                 boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-                borderRadius: '8px',
+                borderRadius: '6px',
               }}
             />
             {/* Floating quote */}
             <div className="about-floating-quote" style={{
               position: 'absolute',
               bottom: '-24px',
-              right: '-24px',
-              background: '#C9A84C',
+              right: '-16px',
+              background: '#1A1A1A',
+              border: '1px solid #C9A84C',
               padding: '24px',
-              maxWidth: '300px',
-              boxShadow: '0 10px 20px rgba(0,0,0,0.1)',
+              maxWidth: '320px',
+              boxShadow: '0 12px 30px rgba(0,0,0,0.2)',
             }}>
               <p style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                color: '#1A1A1A',
-                fontSize: '15px',
+                color: '#ffffff',
+                fontSize: '16px',
                 fontStyle: 'italic',
                 lineHeight: 1.6,
+                margin: '0 0 10px',
               }}>
-                "Every stroke is a prayer. Every painting is a gift to the one who gazes upon it."
+                "True art refuses to be caged in one genre. Whether carving space in cubism, releasing spirit in abstract fields, or illuminating sacred words, the canvas is an infinite horizon."
               </p>
               <p style={{
-                color: '#1A1A1A',
+                color: '#C9A84C',
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '11px',
                 fontWeight: 700,
-                marginTop: '12px',
                 textTransform: 'uppercase',
                 letterSpacing: '2px',
+                margin: 0,
               }}>
                 — Amir
               </p>
@@ -135,10 +141,12 @@ export default function AboutPage() {
               letterSpacing: '6px',
               textTransform: 'uppercase',
               fontFamily: 'Inter, sans-serif',
+              fontWeight: 600,
               marginBottom: '16px',
             }}>
-              My Journey
+              The Atelier Vision
             </p>
+
             <h2 style={{
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: 'clamp(28px, 3.5vw, 44px)',
@@ -147,28 +155,29 @@ export default function AboutPage() {
               marginBottom: '24px',
               lineHeight: 1.25,
             }}>
-              From Karachi to the<br />World Stage
+              Bridging Heritage Discipline<br />and Avant-Garde Expression
             </h2>
+
             <div style={{
-              color: '#8A7A6A',
+              color: '#5C5046',
               fontFamily: 'Inter, sans-serif',
-              fontSize: '16px',
+              fontSize: '15px',
               lineHeight: 1.8,
               display: 'flex',
               flexDirection: 'column',
-              gap: '20px',
+              gap: '18px',
             }}>
               <p>
-                I was born into a family of scholars and artists in Karachi, Pakistan. My grandfather, a gifted Quranic scribe, placed a reed pen in my five-year-old hands and whispered, "The pen is mightier than the sword, and more beautiful than both."
+                Born into a family steeped in visual arts in Karachi, Amir began his artistic journey under the mentorship of celebrated modern master painter <strong>Mashqoor Raza</strong>. Studying Raza’s radical approach to figurative abstraction, bold impasto, and cubist form deconstruction gave Amir an uncompromising love for modernist aesthetics and dynamic movement.
               </p>
               <p>
-                I spent my formative years studying under the legendary Artist Mashqoor Raza.
+                Simultaneously, Amir immersed himself in the deep discipline of classical South Asian miniature painting on handmade wasli paper, alongside formal training in traditional Ottoman Thuluth, Diwani, and Kufic calligraphy. 
               </p>
               <p>
-                After 15 years of dedicated study and practice, I returned home with one mission: to share the transcendent beauty of Islamic calligraphy with the world, not locked away in museums, but hanging in your living room, your office, your heart.
+                Over 15 years of relentless studio practice have culminated in a rare multidisciplinary portfolio: canvases that oscillate naturally between the untamed emotional energy of Abstract Expressionism, the structured intellectual rhythm of Cubism, the microscopic gold-leaf delicacy of Mughal miniatures, and the transcendent serenity of Islamic script.
               </p>
               <p>
-                Each painting I create is a devotion — a meditation — a gift. I use only the finest materials: archival canvases, 24-karat gold leaf, botanical inks ground to recipe. But it is the intention behind every stroke that truly elevates the work.
+                Today, Amir’s original works grace prestigious private residences, corporate collections, and embassies in more than 85 countries worldwide.
               </p>
             </div>
 
@@ -183,8 +192,8 @@ export default function AboutPage() {
             }}>
               {[
                 { num: '15+', label: 'Years of Mastery' },
-                { num: '500+', label: 'Paintings Created' },
-                { num: '80+', label: 'Countries Shipped' },
+                { num: '500+', label: 'Original Works' },
+                { num: '85+', label: 'Countries Shipped' },
               ].map((stat) => (
                 <div key={stat.label} style={{ textAlign: 'center' }}>
                   <p style={{
@@ -192,6 +201,7 @@ export default function AboutPage() {
                     fontSize: '28px',
                     fontWeight: 700,
                     color: '#C9A84C',
+                    margin: 0,
                   }}>{stat.num}</p>
                   <p style={{
                     color: '#8A7A6A',
@@ -200,6 +210,7 @@ export default function AboutPage() {
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     marginTop: '4px',
+                    margin: 0,
                   }}>{stat.label}</p>
                 </div>
               ))}
@@ -208,9 +219,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Process */}
-      <section style={{ padding: '96px 24px', background: '#1A1A1A', position: 'relative' }}>
-        <div className="arabic-pattern" style={{ position: 'absolute', inset: 0, opacity: 0.08 }} />
+      {/* The Four Disciplines of the Atelier */}
+      <section style={{ padding: '96px 24px', background: '#161413', position: 'relative' }}>
+        <div className="arabic-pattern" style={{ position: 'absolute', inset: 0, opacity: 0.06 }} />
         <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <p style={{
@@ -219,9 +230,10 @@ export default function AboutPage() {
               letterSpacing: '6px',
               textTransform: 'uppercase',
               fontFamily: 'Inter, sans-serif',
+              fontWeight: 600,
               marginBottom: '12px',
             }}>
-              Craftsmanship
+              Core Movements
             </p>
             <h2 style={{
               fontFamily: "'Playfair Display', Georgia, serif",
@@ -229,41 +241,57 @@ export default function AboutPage() {
               fontWeight: 700,
               color: '#ffffff',
             }}>
-              The Creative Process
+              Four Pillars of the Atelier
             </h2>
           </div>
+
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '32px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '28px',
           }}>
             {[
-              { num: '01', title: 'Intention', desc: 'Every work begins with a prayer and a clear intention — this is the foundation of all sacred art.' },
-              { num: '02', title: 'Design', desc: 'Weeks of sketching and refining the composition, studying classical examples, finding the perfect balance.' },
-              { num: '03', title: 'Painting', desc: 'Hand-painted with the finest inks and gold leaf, using traditional reed pens and custom brushes.' },
-              { num: '04', title: 'Finishing', desc: 'Each piece is sealed, framed with care, and individually inspected before it is ever offered for sale.' },
-            ].map((step, i) => (
-              <div key={step.num} style={{
-                textAlign: 'center',
+              {
+                num: '01',
+                title: 'Abstract Expressionism',
+                desc: 'Heavy impasto, textured palette knives, and spontaneous emotive color fields exploring raw visual psychology.',
+                accent: 'Ultramarine, Burnt Sienna & Gold Dust',
+              },
+              {
+                num: '02',
+                title: 'Modernist Cubism',
+                desc: 'Deconstructing subjects into geometric planes and multifaceted perspectives inspired by 20th-century avant-garde masters.',
+                accent: 'Sepia, Slate & Geometric Planes',
+              },
+              {
+                num: '03',
+                title: 'Persian & Mughal Miniature',
+                desc: 'Exacting single-hair squirrel brushwork on treated wasli paper with ground lapis lazuli, malachite, and shell gold.',
+                accent: 'Wasli Paper, Mineral Pigment & 24K Leaf',
+              },
+              {
+                num: '04',
+                title: 'Sacred Calligraphy',
+                desc: 'Centuries of classical Thuluth, Diwani, and Kufic script mastered with meditation, devotion, and botanical inks.',
+                accent: '24K Gold Leaf, Oak Gall Inks on Canvas',
+              },
+            ].map((pillar, i) => (
+              <div key={pillar.num} style={{
+                background: '#201D1A',
+                border: '1px solid rgba(201,168,76,0.25)',
+                padding: '36px 28px',
+                borderRadius: '2px',
                 opacity: 0,
                 animation: `fadeInUp 0.6s ease ${i * 0.15}s forwards`,
               }}>
                 <div style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '50%',
-                  border: '1px solid rgba(201, 168, 76, 0.5)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 20px',
+                  fontFamily: "'Playfair Display', Georgia, serif",
+                  fontSize: '32px',
+                  fontWeight: 700,
+                  color: '#C9A84C',
+                  marginBottom: '16px',
                 }}>
-                  <span style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    fontSize: '24px',
-                    fontWeight: 700,
-                    color: '#C9A84C',
-                  }}>{step.num}</span>
+                  {pillar.num}
                 </div>
                 <h3 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
@@ -271,13 +299,29 @@ export default function AboutPage() {
                   fontWeight: 700,
                   color: '#ffffff',
                   marginBottom: '12px',
-                }}>{step.title}</h3>
+                }}>
+                  {pillar.title}
+                </h3>
                 <p style={{
-                  color: 'rgba(255, 255, 255, 0.5)',
+                  color: 'rgba(255,255,255,0.65)',
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '14px',
                   lineHeight: 1.7,
-                }}>{step.desc}</p>
+                  marginBottom: '20px',
+                }}>
+                  {pillar.desc}
+                </p>
+                <div style={{
+                  borderTop: '1px solid rgba(255,255,255,0.1)',
+                  paddingTop: '14px',
+                  color: '#C9A84C',
+                  fontSize: '11px',
+                  fontFamily: 'Inter, sans-serif',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                }}>
+                  ✦ {pillar.accent}
+                </div>
               </div>
             ))}
           </div>
@@ -293,9 +337,10 @@ export default function AboutPage() {
             letterSpacing: '6px',
             textTransform: 'uppercase',
             fontFamily: 'Inter, sans-serif',
+            fontWeight: 600,
             marginBottom: '12px',
           }}>
-            Training & Recognition
+            Recognition & Exhibitions
           </p>
           <h2 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
@@ -304,7 +349,7 @@ export default function AboutPage() {
             color: '#1A1A1A',
             marginBottom: '48px',
           }}>
-            Credentials
+            Selected Milestones
           </h2>
           <div style={{
             display: 'grid',
@@ -312,35 +357,40 @@ export default function AboutPage() {
             gap: '24px',
           }}>
             {[
-              { year: '2008', title: 'Traditional Calligraphy Certificate', org: 'Karachi Calligraphy Institute' },
-              { year: '2013', title: 'Ottoman Thuluth Mastery', org: 'Karachi Fine Arts Academy' },
-              { year: '2018', title: 'International Calligraphy Award', org: 'Islamic Arts Foundation, Islamabad' },
+              { year: '2010', title: 'Classical Miniature & Calligraphy Certification', org: 'Karachi Fine Arts Council' },
+              { year: '2016', title: 'Contemporary Expressionism Solo Showcase', org: 'Indus Arts Gallery, Karachi' },
+              { year: '2021', title: 'International Sacred Arts Recognition', org: 'Islamic Arts Foundation, Islamabad' },
+              { year: '2024', title: 'Global Collectors Atelier Launch', org: 'Exhibiting in UAE, UK & North America' },
             ].map((cred) => (
               <div key={cred.year} style={{
                 background: '#ffffff',
                 border: '1px solid #E8DFC8',
-                padding: '24px',
+                padding: '28px 24px',
                 textAlign: 'center',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
               }}>
                 <p style={{
                   color: '#C9A84C',
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '12px',
+                  fontSize: '13px',
                   letterSpacing: '2px',
+                  fontWeight: 700,
                   textTransform: 'uppercase',
                   marginBottom: '12px',
                 }}>{cred.year}</p>
                 <h3 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
-                  fontSize: '18px',
+                  fontSize: '17px',
                   fontWeight: 700,
                   color: '#1A1A1A',
                   marginBottom: '8px',
+                  lineHeight: 1.3,
                 }}>{cred.title}</h3>
                 <p style={{
                   color: '#8A7A6A',
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '14px',
+                  fontSize: '13px',
+                  margin: 0,
                 }}>{cred.org}</p>
               </div>
             ))}
@@ -356,28 +406,29 @@ export default function AboutPage() {
           letterSpacing: '6px',
           textTransform: 'uppercase',
           fontFamily: 'Inter, sans-serif',
+          fontWeight: 600,
           marginBottom: '16px',
         }}>
-          Commission a Piece
+          Commission An Original
         </p>
         <h2 style={{
           fontFamily: "'Playfair Display', Georgia, serif",
           fontSize: 'clamp(28px, 4vw, 44px)',
           fontWeight: 700,
           color: '#1A1A1A',
-          marginBottom: '24px',
+          marginBottom: '20px',
         }}>
-          Let's Create Something Beautiful
+          Collaborate on a Bespoke Masterpiece
         </h2>
         <p style={{
-          color: '#8A7A6A',
+          color: '#6B5E52',
           fontFamily: 'Inter, sans-serif',
           fontSize: '16px',
-          lineHeight: 1.7,
-          maxWidth: '560px',
+          lineHeight: 1.75,
+          maxWidth: '620px',
           margin: '0 auto 40px',
         }}>
-          Whether for a gift, a new home, or a sacred space — I would be honored to craft a bespoke calligraphy painting just for you.
+          Whether you seek a large-format abstract canvas for an architectural space, an analytical cubist still life, a classical royal miniature folio, or an illuminated calligraphy inscription — Amir collaborates directly with private collectors and designers.
         </p>
         <div style={{
           display: 'flex',
@@ -388,7 +439,7 @@ export default function AboutPage() {
           <Link
             to="/contact"
             style={{
-              padding: '16px 36px',
+              padding: '16px 40px',
               background: '#C9A84C',
               color: '#1A1A1A',
               fontFamily: 'Inter, sans-serif',
@@ -397,25 +448,26 @@ export default function AboutPage() {
               letterSpacing: '3px',
               textTransform: 'uppercase',
               textDecoration: 'none',
+              boxShadow: '0 8px 24px rgba(201,168,76,0.25)',
             }}
           >
-            Request Custom Order
+            Inquire Commission
           </Link>
           <Link
             to="/gallery"
             style={{
-              padding: '16px 36px',
+              padding: '16px 40px',
               border: '1px solid #1A1A1A',
               color: '#1A1A1A',
               fontFamily: 'Inter, sans-serif',
-              fontWeight: 500,
+              fontWeight: 600,
               fontSize: '13px',
               letterSpacing: '3px',
               textTransform: 'uppercase',
               textDecoration: 'none',
             }}
           >
-            Browse Gallery
+            Browse Gallery Works
           </Link>
         </div>
       </section>

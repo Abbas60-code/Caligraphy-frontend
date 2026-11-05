@@ -125,6 +125,22 @@ export default function ProductCard({ product, index = 0 }) {
 
           {/* Badges */}
           <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {product.artMovement && (
+              <span style={{
+                background: '#1A1A1A',
+                color: '#C9A84C',
+                border: '1px solid rgba(201,168,76,0.3)',
+                fontSize: '9px',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 700,
+                padding: '4px 8px',
+                textTransform: 'uppercase',
+                letterSpacing: '1.5px',
+                backdropFilter: 'blur(4px)',
+              }}>
+                {product.artMovement}
+              </span>
+            )}
             {product.originalPrice && (
               <span style={{
                 background: '#ef4444',
@@ -135,6 +151,7 @@ export default function ProductCard({ product, index = 0 }) {
                 padding: '3px 8px',
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
+                alignSelf: 'flex-start',
               }}>
                 Sale
               </span>
@@ -149,29 +166,65 @@ export default function ProductCard({ product, index = 0 }) {
                 padding: '3px 8px',
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
+                alignSelf: 'flex-start',
               }}>
                 Custom
               </span>
             )}
           </div>
 
-          {/* Arabic watermark */}
-          <div style={{ position: 'absolute', bottom: '8px', right: '10px' }}>
-            <p style={{
-              color: 'rgba(255,255,255,0.75)',
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: '20px',
-              textAlign: 'right',
-              textShadow: '0 1px 4px rgba(0,0,0,0.5)',
-              lineHeight: 1.2,
-            }}>
-              {product.arabicTitle}
-            </p>
-          </div>
+          {/* Bottom badge / Arabic watermark if present */}
+          {product.arabicTitle ? (
+            <div style={{ position: 'absolute', bottom: '8px', right: '10px' }}>
+              <p style={{
+                color: 'rgba(255,255,255,0.85)',
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: '18px',
+                textAlign: 'right',
+                textShadow: '0 2px 6px rgba(0,0,0,0.7)',
+                lineHeight: 1.2,
+                margin: 0,
+              }}>
+                {product.arabicTitle}
+              </p>
+            </div>
+          ) : (
+            <div style={{ position: 'absolute', bottom: '8px', right: '10px' }}>
+              <span style={{
+                fontSize: '9px',
+                fontFamily: 'Inter, sans-serif',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.7)',
+                textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+              }}>
+                Original Canvas
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Card Info */}
         <div style={{ padding: '16px 18px 20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+            <span style={{
+              color: '#C9A84C',
+              fontSize: '11px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: 600,
+            }}>
+              {product.artMovement || 'Fine Art'}
+            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <StarRating rating={product.rating || 5} />
+              <span style={{ color: '#8A7A6A', fontSize: '11px', fontFamily: 'Inter, sans-serif' }}>
+                ({product.reviews || 0})
+              </span>
+            </div>
+          </div>
+
           <h3 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             fontSize: '17px',
@@ -183,13 +236,6 @@ export default function ProductCard({ product, index = 0 }) {
           }}>
             {product.title}
           </h3>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-            <StarRating rating={product.rating} />
-            <span style={{ color: '#8A7A6A', fontSize: '13px', fontFamily: 'Inter, sans-serif' }}>
-              ({product.reviews})
-            </span>
-          </div>
 
           <p style={{
             color: '#8A7A6A',
