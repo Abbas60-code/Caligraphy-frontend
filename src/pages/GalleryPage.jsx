@@ -467,33 +467,37 @@ export default function GalleryPage() {
               <div style={{ textAlign: 'center', padding: '96px 0', background: '#ffffff', border: '1px solid #E8DFC8' }}>
                 <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎨</div>
                 <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '24px', fontWeight: 700, color: '#1A1A1A', marginBottom: '8px' }}>
-                  No Artworks Found
+                  {products.length === 0 ? 'No Artworks in Gallery' : 'No Artworks Found'}
                 </h3>
                 <p style={{ color: '#8A7A6A', fontFamily: 'Inter, sans-serif', fontSize: '15px', marginBottom: '20px' }}>
-                  No paintings matched your current filter criteria.
+                  {products.length === 0
+                    ? 'All dummy artwork cards have been cleared. New original paintings can be added via the Admin Dashboard.'
+                    : 'No paintings matched your current filter criteria.'}
                 </p>
-                <button
-                  onClick={() => {
-                    setCategory('all');
-                    setSearch('');
-                    setPriceRange([0, 700]);
-                    setAvailabilityFilter('all');
-                  }}
-                  style={{
-                    padding: '12px 24px',
-                    background: '#C9A84C',
-                    color: '#1A1A1A',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Reset All Filters
-                </button>
+                {products.length > 0 && (
+                  <button
+                    onClick={() => {
+                      setCategory('all');
+                      setSearch('');
+                      setPriceRange([0, 700]);
+                      setAvailabilityFilter('all');
+                    }}
+                    style={{
+                      padding: '12px 24px',
+                      background: '#C9A84C',
+                      color: '#1A1A1A',
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      letterSpacing: '1px',
+                      textTransform: 'uppercase',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Reset All Filters
+                  </button>
+                )}
               </div>
             ) : (
               <div style={{

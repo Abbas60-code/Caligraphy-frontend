@@ -38,22 +38,21 @@ const initialOrders = [
 
 
 export function ProductProvider({ children }) {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState([]);
 
   const fetchProducts = useCallback(async () => {
     try {
       const res = await fetch(`${API_BASE}/paintings`);
       const data = await res.json();
-      if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+      if (data.success && Array.isArray(data.data)) {
         // Normalize _id → id for consistency with frontend
         setProducts(data.data.map(p => ({ ...p, id: p._id || p.id })));
       } else {
-        // Fallback to rich multi-art initial catalog
-        setProducts(initialProducts);
+        setProducts([]);
       }
     } catch (err) {
-      console.error('Failed to fetch paintings, using initial catalog:', err);
-      setProducts(initialProducts);
+      console.error('Failed to fetch paintings:', err);
+      setProducts([]);
     }
   }, []);
 

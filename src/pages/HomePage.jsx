@@ -306,6 +306,10 @@ function FeaturedProducts() {
   const { products } = useProducts();
   const featured = products.filter((p) => p.featured);
 
+  if (!products || products.length === 0) {
+    return null;
+  }
+
   return (
     <section style={{ padding: '96px 24px', background: '#FDFAF3' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
@@ -345,7 +349,7 @@ function FeaturedProducts() {
             e.currentTarget.style.background = 'transparent';
             e.currentTarget.style.color = '#1A1A1A';
           }}>
-            View Complete Gallery (17 Works) →
+            View Complete Gallery →
           </Link>
         </div>
       </div>
