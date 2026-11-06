@@ -18,8 +18,14 @@ export default function GalleryPage() {
   const [sort, setSort] = useState('latest');
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [availabilityFilter, setAvailabilityFilter] = useState('all');
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const activeCategory = searchParams.get('category') || 'all';
+
+  const activeFiltersCount =
+    (activeCategory !== 'all' ? 1 : 0) +
+    (priceRange[1] < 5000 ? 1 : 0) +
+    (availabilityFilter !== 'all' ? 1 : 0);
 
   const setCategory = (cat) => {
     if (cat === 'all') {
@@ -95,9 +101,9 @@ export default function GalleryPage() {
   return (
     <div style={{ background: '#FDFAF3', minHeight: '100vh' }} className="page-enter">
       {/* Page Header */}
-      <div style={{
+      <div className="gallery-page-header" style={{
         background: '#161413',
-        padding: '120px 24px 60px',
+        padding: '110px 24px 50px',
         position: 'relative',
         overflow: 'hidden',
       }}>
@@ -107,13 +113,14 @@ export default function GalleryPage() {
           <div style={{
             display: 'flex',
             alignItems: 'center',
+            flexWrap: 'wrap',
             gap: '8px',
             color: 'rgba(255, 255, 255, 0.45)',
             fontFamily: 'Inter, sans-serif',
             fontSize: '12px',
             textTransform: 'uppercase',
             letterSpacing: '2px',
-            marginBottom: '20px',
+            marginBottom: '16px',
           }}>
             <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link>
             <span>/</span>
@@ -122,10 +129,10 @@ export default function GalleryPage() {
 
           <h1 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: 'clamp(32px, 5vw, 56px)',
+            fontSize: 'clamp(28px, 4.5vw, 52px)',
             fontWeight: 700,
             color: '#ffffff',
-            marginBottom: '16px',
+            marginBottom: '14px',
             lineHeight: 1.15,
           }}>
             The Fine Art Gallery
@@ -134,8 +141,8 @@ export default function GalleryPage() {
           <p style={{
             color: 'rgba(255, 255, 255, 0.7)',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '16px',
-            lineHeight: 1.7,
+            fontSize: '15px',
+            lineHeight: 1.65,
             maxWidth: '680px',
             margin: 0,
           }}>
@@ -143,15 +150,20 @@ export default function GalleryPage() {
           </p>
 
           {/* Quick Filter Horizontal Scroll Bar */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            overflowX: 'auto',
-            paddingTop: '32px',
-            paddingBottom: '8px',
-            scrollbarWidth: 'none',
-          }}>
+          <div
+            className="category-pills-scroll"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              overflowX: 'auto',
+              paddingTop: '28px',
+              paddingBottom: '8px',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
             <button
               onClick={() => setCategory('all')}
               style={{
@@ -168,6 +180,7 @@ export default function GalleryPage() {
                 textTransform: 'uppercase',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
+                flexShrink: 0,
               }}
             >
               All Works ({products.length})
@@ -192,6 +205,7 @@ export default function GalleryPage() {
                     textTransform: 'uppercase',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
+                    flexShrink: 0,
                   }}
                 >
                   {cat.label}
@@ -203,21 +217,21 @@ export default function GalleryPage() {
       </div>
 
       {/* Main Gallery Area */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '48px 24px 96px' }}>
+      <div className="gallery-main-padding" style={{ maxWidth: '1280px', margin: '0 auto', padding: '40px 24px 96px' }}>
         {/* Top Controls Bar */}
-        <div style={{
+        <div className="gallery-controls-bar" style={{
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
           gap: '16px',
           alignItems: 'center',
           justifyContent: 'space-between',
-          marginBottom: '36px',
+          marginBottom: '32px',
           borderBottom: '1px solid #E8DFC8',
-          paddingBottom: '24px',
+          paddingBottom: '20px',
         }}>
           {/* Search Input */}
-          <div style={{ position: 'relative', width: '360px', maxWidth: '100%' }}>
+          <div className="gallery-search-wrap" style={{ position: 'relative', width: '360px', maxWidth: '100%' }}>
             <input
               id="gallery-search"
               type="text"
@@ -241,10 +255,11 @@ export default function GalleryPage() {
             </svg>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+          <div className="gallery-sort-wrap" style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
             {/* Sort Dropdown */}
             <select
               id="gallery-sort"
+              className="gallery-sort-select"
               value={sort}
               onChange={(e) => setSort(e.target.value)}
               style={{
@@ -263,10 +278,50 @@ export default function GalleryPage() {
               ))}
             </select>
 
-            <span style={{ color: '#8A7A6A', fontFamily: 'Inter, sans-serif', fontSize: '14px', fontWeight: 500 }}>
+            <span style={{ color: '#8A7A6A', fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: 500 }}>
               Showing {filtered.length} of {products.length} works
             </span>
           </div>
+        </div>
+
+        {/* Mobile Filter Toggle Button */}
+        <div className="mobile-filter-toggle-container">
+          <button
+            onClick={() => setShowMobileFilters(!showMobileFilters)}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '13px 18px',
+              background: showMobileFilters ? 'rgba(201,168,76,0.1)' : '#ffffff',
+              border: showMobileFilters ? '1px solid #C9A84C' : '1px solid #D4C4A0',
+              color: '#1A1A1A',
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '13px',
+              fontWeight: 600,
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              marginBottom: '20px',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+            }}
+          >
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 6h16M7 12h10M10 18h4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {showMobileFilters ? 'Hide Filters' : 'Filter by Movement & Price'}
+              {activeFiltersCount > 0 && (
+                <span style={{ background: '#C9A84C', color: '#1A1A1A', padding: '2px 7px', borderRadius: '10px', fontSize: '11px', fontWeight: 700 }}>
+                  {activeFiltersCount}
+                </span>
+              )}
+            </span>
+            <span style={{ color: '#8A7A6A', fontSize: '12px' }}>
+              {showMobileFilters ? '▲ Close' : '▼ Refine'}
+            </span>
+          </button>
         </div>
 
         {/* 2-Column Layout: Sidebar + Grid */}
@@ -502,11 +557,14 @@ export default function GalleryPage() {
                 )}
               </div>
             ) : (
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-                gap: '28px',
-              }}>
+              <div
+                className="gallery-artworks-grid"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+                  gap: '28px',
+                }}
+              >
                 {filtered.map((product, i) => (
                   <ProductCard key={product.id || product._id} product={product} index={i} />
                 ))}
@@ -517,7 +575,7 @@ export default function GalleryPage() {
       </div>
 
       {/* Commission CTA */}
-      <div style={{
+      <div className="gallery-cta-section" style={{
         background: '#1A1A1A',
         padding: '80px 24px',
         textAlign: 'center',
@@ -613,13 +671,88 @@ export default function GalleryPage() {
       </div>
 
       <style>{`
+        /* Quick Category Pill Scroll */
+        .category-pills-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
+        /* Tablet & Mobile Layout Breakpoints */
         @media (max-width: 860px) {
           .gallery-main-grid {
             grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          .mobile-filter-toggle-container {
+            display: block !important;
           }
           .gallery-sidebar {
-            border-bottom: 1px solid #E8DFC8;
-            padding-bottom: 32px;
+            display: ${showMobileFilters ? 'flex' : 'none'} !important;
+            background: #ffffff;
+            padding: 24px 20px;
+            border: 1px solid #E8DFC8;
+            border-radius: 2px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+          }
+          .gallery-controls-bar {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 14px !important;
+            margin-bottom: 20px !important;
+          }
+          .gallery-search-wrap {
+            width: 100% !important;
+          }
+          .gallery-sort-wrap {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+          }
+          .gallery-sort-select {
+            flex: 1 !important;
+            max-width: 60% !important;
+          }
+        }
+
+        @media (min-width: 861px) {
+          .mobile-filter-toggle-container {
+            display: none !important;
+          }
+          .gallery-sidebar {
+            display: flex !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .gallery-page-header {
+            padding: 96px 16px 28px !important;
+          }
+          .gallery-main-padding {
+            padding: 24px 16px 64px !important;
+          }
+          .gallery-artworks-grid {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+            gap: 18px !important;
+          }
+          .gallery-cta-section {
+            padding: 56px 16px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .gallery-artworks-grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+          .gallery-sort-wrap {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 8px !important;
+          }
+          .gallery-sort-select {
+            max-width: 100% !important;
+            width: 100% !important;
           }
         }
       `}</style>
