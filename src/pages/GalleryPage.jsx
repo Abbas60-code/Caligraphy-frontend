@@ -16,7 +16,7 @@ export default function GalleryPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('latest');
-  const [priceRange, setPriceRange] = useState([0, 2000]);
+  const [priceRange, setPriceRange] = useState([0, 5000]);
   const [availabilityFilter, setAvailabilityFilter] = useState('all');
 
   const activeCategory = searchParams.get('category') || 'all';
@@ -368,8 +368,8 @@ export default function GalleryPage() {
                   id="gallery-price-slider"
                   type="range"
                   min="0"
-                  max="2000"
-                  step="50"
+                  max="5000"
+                  step="100"
                   value={priceRange[1]}
                   onChange={(e) => setPriceRange([0, Number(e.target.value)])}
                   style={{ width: '100%', accentColor: '#C9A84C' }}
@@ -481,7 +481,7 @@ export default function GalleryPage() {
                     onClick={() => {
                       setCategory('all');
                       setSearch('');
-                      setPriceRange([0, 2000]);
+                      setPriceRange([0, 5000]);
                       setAvailabilityFilter('all');
                     }}
                     style={{
