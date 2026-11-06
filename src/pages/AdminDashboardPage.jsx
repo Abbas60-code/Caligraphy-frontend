@@ -295,8 +295,11 @@ export default function AdminDashboardPage({ onLogout }) {
 
       <div className="admin-layout" style={{
         display: 'grid',
-        gridTemplateColumns: '260px 1fr',
+        gridTemplateColumns: '260px minmax(0, 1fr)',
         minHeight: '100vh',
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
         background: '#121212',
         color: '#ffffff',
         fontFamily: 'Inter, sans-serif',
@@ -416,7 +419,7 @@ export default function AdminDashboardPage({ onLogout }) {
         </aside>
 
         {/* Main Workspace */}
-        <main className="admin-main-padding" style={{ padding: '40px', overflowY: 'auto', maxHeight: '100vh' }}>
+        <main className="admin-main-padding" style={{ padding: '36px 32px', overflowY: 'auto', maxHeight: '100vh', minWidth: 0, width: '100%', boxSizing: 'border-box' }}>
           {/* Header */}
           <div className="admin-header-flex" style={{
             display: 'flex',
@@ -584,90 +587,100 @@ export default function AdminDashboardPage({ onLogout }) {
 
         {/* ---------------- CATALOG TAB ---------------- */}
         {activeTab === 'catalog' && (
-          <div style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '4px' }}>
-            <div className="admin-table-container" style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <div style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '4px', overflow: 'hidden' }}>
+            <div className="admin-table-container" style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+              <table style={{ width: '100%', minWidth: '780px', borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}>
-                    <th style={{ padding: '16px 24px', fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Painting</th>
-                    <th style={{ padding: '16px 24px', fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Category</th>
-                    <th style={{ padding: '16px 24px', fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Price</th>
-                    <th style={{ padding: '16px 24px', fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Status</th>
-                    <th style={{ padding: '16px 24px', fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Badges</th>
-                    <th style={{ padding: '16px 24px', fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px', textAlign: 'right' }}>Actions</th>
+                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '32%' }}>Painting</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '20%' }}>Category</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '14%' }}>Price</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '12%' }}>Status</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '10%' }}>Badges</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', textAlign: 'right', width: '12%' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr key={product.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'background 0.2s' }} className="hover:bg-white/[0.01]">
+                    <tr key={product.id || product._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'background 0.2s' }} className="hover:bg-white/[0.02]">
                       {/* Image + Title */}
-                      <td style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                        <img
-                          src={getOptimizedImageUrl(product.image, 200)}
-                          alt={product.title}
-                          loading="lazy"
-                          style={{ width: '48px', height: '48px', objectFit: 'cover', background: '#222' }}
-                        />
-                        <div>
-                          <p style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff' }}>{product.title}</p>
-                          <p style={{ fontSize: '13px', color: '#C9A84C', fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', marginTop: '2px' }}>{product.arabicTitle}</p>
+                      <td style={{ padding: '14px 18px', verticalAlign: 'middle' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                          <img
+                            src={getOptimizedImageUrl(product.image, 200)}
+                            alt={product.title}
+                            loading="lazy"
+                            style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '3px', flexShrink: 0, background: '#222', border: '1px solid rgba(255,255,255,0.08)' }}
+                          />
+                          <div style={{ minWidth: 0, overflow: 'hidden' }}>
+                            <p style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {product.title}
+                            </p>
+                            {product.arabicTitle && (
+                              <p style={{ fontSize: '12px', color: '#C9A84C', fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', margin: '2px 0 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {product.arabicTitle}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </td>
 
                       {/* Category */}
-                      <td style={{ padding: '16px 24px', fontSize: '14px', color: 'rgba(255,255,255,0.7)' }}>
+                      <td style={{ padding: '14px 18px', fontSize: '13px', color: 'rgba(255,255,255,0.7)', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
                         {categories.find((c) => c.id === product.category)?.label || product.category}
                       </td>
 
                       {/* Price */}
-                      <td style={{ padding: '16px 24px' }}>
-                        <span style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>${product.price}</span>
+                      <td style={{ padding: '14px 18px', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
+                        <span style={{ fontSize: '14px', fontWeight: 700, color: '#ffffff' }}>${product.price}</span>
                         {product.originalPrice && (
-                          <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.3)', textDecoration: 'line-through', marginLeft: '8px' }}>
+                          <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', textDecoration: 'line-through', marginLeft: '6px' }}>
                             ${product.originalPrice}
                           </span>
                         )}
                       </td>
 
                       {/* Availability */}
-                      <td style={{ padding: '16px 24px' }}>
+                      <td style={{ padding: '14px 18px', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
                         <span style={{
-                          fontSize: '11px',
+                          fontSize: '10px',
                           fontWeight: 700,
                           textTransform: 'uppercase',
-                          padding: '3px 8px',
+                          letterSpacing: '0.5px',
+                          padding: '4px 8px',
                           borderRadius: '2px',
                           background: product.availability === 'In Stock' ? 'rgba(74, 222, 128, 0.15)' : 'rgba(251, 191, 36, 0.15)',
                           color: product.availability === 'In Stock' ? '#4ade80' : '#fbbf24',
+                          border: product.availability === 'In Stock' ? '1px solid rgba(74, 222, 128, 0.3)' : '1px solid rgba(251, 191, 36, 0.3)',
                         }}>
                           {product.availability}
                         </span>
                       </td>
 
                       {/* Badges */}
-                      <td style={{ padding: '16px 24px' }}>
-                        <div style={{ display: 'flex', gap: '6px' }}>
+                      <td style={{ padding: '14px 18px', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
+                        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                           {product.featured && (
-                            <span style={{ fontSize: '10px', background: 'rgba(201, 168, 76, 0.2)', color: '#C9A84C', padding: '2px 6px', fontWeight: 600 }}>FEATURED</span>
+                            <span style={{ fontSize: '9px', background: 'rgba(201, 168, 76, 0.2)', color: '#C9A84C', padding: '2px 6px', fontWeight: 700, borderRadius: '2px', border: '1px solid rgba(201, 168, 76, 0.3)' }}>FEATURED</span>
                           )}
                           {product.popular && (
-                            <span style={{ fontSize: '10px', background: 'rgba(96, 165, 250, 0.2)', color: '#60a5fa', padding: '2px 6px', fontWeight: 600 }}>POPULAR</span>
+                            <span style={{ fontSize: '9px', background: 'rgba(96, 165, 250, 0.2)', color: '#60a5fa', padding: '2px 6px', fontWeight: 700, borderRadius: '2px', border: '1px solid rgba(96, 165, 250, 0.3)' }}>POPULAR</span>
                           )}
                         </div>
                       </td>
 
                       {/* Actions */}
-                      <td style={{ padding: '16px 24px', textAlign: 'right' }}>
+                      <td style={{ padding: '14px 18px', textAlign: 'right', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
                         <button
                           onClick={() => handleOpenEditModal(product)}
                           style={{
                             background: 'transparent',
                             color: '#C9A84C',
                             border: '1px solid rgba(201, 168, 76, 0.3)',
-                            padding: '6px 12px',
-                            fontSize: '13px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
                             cursor: 'pointer',
-                            marginRight: '8px',
+                            marginRight: '6px',
                             borderRadius: '2px',
                             transition: 'all 0.2s',
                           }}
@@ -676,18 +689,18 @@ export default function AdminDashboardPage({ onLogout }) {
                           Edit
                         </button>
                         <button
-                          onClick={() => handleDeleteProduct(product.id)}
+                          onClick={() => handleDeleteProduct(product.id || product._id)}
                           style={{
                             background: 'transparent',
-                            color: '#f87171',
+                            color: '#ef4444',
                             border: '1px solid rgba(239, 68, 68, 0.3)',
-                            padding: '6px 12px',
-                            fontSize: '13px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
                             cursor: 'pointer',
                             borderRadius: '2px',
                             transition: 'all 0.2s',
                           }}
-                          className="hover:bg-red-500 hover:text-white"
+                          className="hover:bg-[#ef4444] hover:text-[#fff]"
                         >
                           Delete
                         </button>
@@ -1145,6 +1158,28 @@ export default function AdminDashboardPage({ onLogout }) {
           </div>
         </div>
       )}
+      {/* Responsive Layout Styles */}
+      <style>{`
+        @media (max-width: 900px) {
+          .admin-layout {
+            grid-template-columns: 1fr !important;
+          }
+          .admin-sidebar-desktop {
+            display: none !important;
+          }
+          .admin-mobile-header {
+            display: flex !important;
+          }
+          .admin-main-padding {
+            padding: 20px 16px !important;
+          }
+          .admin-header-flex {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     </div>
   </div>
 );
