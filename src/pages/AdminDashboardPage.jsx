@@ -589,22 +589,45 @@ export default function AdminDashboardPage({ onLogout }) {
         {activeTab === 'catalog' && (
           <div style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '4px', overflow: 'hidden' }}>
             <div className="admin-table-container" style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-              <table style={{ width: '100%', minWidth: '780px', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <table style={{ width: '100%', minWidth: '720px', borderCollapse: 'separate', borderSpacing: 0, textAlign: 'left' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '32%' }}>Painting</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '20%' }}>Category</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '14%' }}>Price</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '12%' }}>Status</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', width: '10%' }}>Badges</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', textAlign: 'right', width: '12%' }}>Actions</th>
+                    <th style={{
+                      padding: '14px 18px',
+                      fontSize: '11px',
+                      textTransform: 'uppercase',
+                      color: 'rgba(255,255,255,0.45)',
+                      letterSpacing: '1px',
+                      position: 'sticky',
+                      left: 0,
+                      background: '#1D1D1D',
+                      zIndex: 10,
+                      minWidth: '220px',
+                      boxShadow: '3px 0 8px rgba(0,0,0,0.4)',
+                    }}>
+                      Painting
+                    </th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '140px' }}>Category</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '90px' }}>Price</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '90px' }}>Status</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '100px' }}>Badges</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', textAlign: 'right', minWidth: '120px' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
                     <tr key={product.id || product._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'background 0.2s' }} className="hover:bg-white/[0.02]">
-                      {/* Image + Title */}
-                      <td style={{ padding: '14px 18px', verticalAlign: 'middle' }}>
+                      {/* Image + Title — STICKY so it never scrolls out */}
+                      <td style={{
+                        padding: '14px 18px',
+                        verticalAlign: 'middle',
+                        position: 'sticky',
+                        left: 0,
+                        background: '#1A1A1A',
+                        zIndex: 5,
+                        minWidth: '220px',
+                        boxShadow: '3px 0 8px rgba(0,0,0,0.4)',
+                      }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                           <img
                             src={getOptimizedImageUrl(product.image, 200)}
@@ -613,11 +636,11 @@ export default function AdminDashboardPage({ onLogout }) {
                             style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '3px', flexShrink: 0, background: '#222', border: '1px solid rgba(255,255,255,0.08)' }}
                           />
                           <div style={{ minWidth: 0, overflow: 'hidden' }}>
-                            <p style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <p style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '180px' }}>
                               {product.title}
                             </p>
                             {product.arabicTitle && (
-                              <p style={{ fontSize: '12px', color: '#C9A84C', fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', margin: '2px 0 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              <p style={{ fontSize: '12px', color: '#C9A84C', fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', margin: '2px 0 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '180px' }}>
                                 {product.arabicTitle}
                               </p>
                             )}

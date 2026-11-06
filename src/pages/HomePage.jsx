@@ -60,31 +60,31 @@ function Hero() {
 
   const heroMovements = [
     {
-      name: "Abstract Expressionism",
-      tagline: "Emotion, Texture & Kinetic Motion",
-      image: "/art/abstract_1.jpg",
-      category: "abstract",
+      name: "Classical Calligraphy",
+      tagline: "Sacred Arabic Scripts in 24K Gold Leaf",
+      image: "/calligraphy_allah.png",
+      category: "calligraphy",
       accent: "#C9A84C",
     },
     {
-      name: "Modernist Cubism",
-      tagline: "Deconstructed Planes & Architectural Rhythms",
-      image: "/art/cubism_1.jpg",
-      category: "cubism",
+      name: "Modern Fusion",
+      tagline: "Contemporary Dialogue & Spiritual Grace",
+      image: "/calligraphy_modern.png",
+      category: "modern-fusion",
       accent: "#E5A93C",
     },
     {
-      name: "Royal Miniature Art",
-      tagline: "Fine Heritage Detailing on Wasli Paper",
-      image: "/art/miniature_1.jpg",
-      category: "miniature",
+      name: "Quranic Masterworks",
+      tagline: "Majestic Ayatul Kursi on Rich Archival Canvas",
+      image: "/calligraphy_ayatul_kursi.png",
+      category: "abstract",
       accent: "#D4AF37",
     },
     {
-      name: "Sacred Calligraphy",
-      tagline: "Classical Arabic Scripts in 24K Gold Leaf",
-      image: "/calligraphy_allah.png",
-      category: "calligraphy",
+      name: "Illuminated Heritage",
+      tagline: "Classical Bismillah with Botanical Inks",
+      image: "/calligraphy_bismillah.png",
+      category: "cubism",
       accent: "#C9A84C",
     },
   ];
@@ -364,8 +364,8 @@ function FeaturedArtworks() {
 
 // ─── Movement Collections Grid ───────────────────────────────────────────────
 function MovementsGrid() {
-  // Filter out "all" category for the grid cards
-  const displayCategories = categories.filter(c => c.id !== 'all');
+  // Filter out "all" and legacy categories for the grid cards
+  const displayCategories = categories.filter(c => c.id !== 'all' && c.id !== 'arabic-calligraphy');
 
   return (
     <section style={{ padding: '100px 24px', background: '#181615', position: 'relative', overflow: 'hidden' }}>

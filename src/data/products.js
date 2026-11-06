@@ -27,7 +27,7 @@ export const categories = [
     arabic: 'تجريدي',
     subtitle: 'Expression & Texture',
     description: 'Gestural canvases capturing pure emotion, rich textural impasto, and luminous oil tones.',
-    image: '/art/0d46b64eeeb730ae9051b8b5afd24924.jpg',
+    image: '/calligraphy_ayatul_kursi.png',
   },
   {
     id: 'cubism',
@@ -35,7 +35,7 @@ export const categories = [
     arabic: 'تكعيبي',
     subtitle: 'Geometry & Planes',
     description: 'Deconstructed forms, multifaceted architectural planes, and dynamic chiaroscuro rhythms.',
-    image: '/art/2de1289a41c9897deddc6a0e82ddfb5a.jpg',
+    image: '/calligraphy_bismillah.png',
   },
   {
     id: 'miniature',
@@ -43,7 +43,7 @@ export const categories = [
     arabic: 'مصغرات',
     subtitle: 'Heritage Detailing',
     description: 'Classical Mughal and Persian miniatures painted with single-hair brushes on archival wasli.',
-    image: '/art/4b283e3e87631b9887cd07b0525bac2e.jpg',
+    image: '/calligraphy_ayatul_kursi.png',
   },
   {
     id: 'modern-fusion',
@@ -52,6 +52,14 @@ export const categories = [
     subtitle: 'Contemporary Dialogue',
     description: 'Contemporary harmonization blending eastern aesthetics, spiritual grace, and modern scale.',
     image: '/calligraphy_modern.png',
+  },
+  {
+    id: 'arabic-calligraphy',
+    label: 'Arabic Calligraphy',
+    arabic: 'الخط العربي الكلاسيكي',
+    subtitle: 'Classical Arabic',
+    description: 'Classical Arabic calligraphy traditions and sacred verses.',
+    image: '/calligraphy_allah.png',
   },
 ];
 
