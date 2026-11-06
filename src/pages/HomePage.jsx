@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { categories, testimonials, features } from '../data/products';
-import { useProducts } from '../context/ProductContext';
-import ProductCard from '../components/ProductCard';
 import { getOptimizedImageUrl } from '../utils/image';
 
 // ─── Shared section header ────────────────────────────────────────────────────
@@ -296,62 +294,6 @@ function Hero() {
       }} className="animate-bounce">
         <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>Explore</p>
         <div style={{ width: '1px', height: '30px', background: 'linear-gradient(to bottom, #C9A84C, transparent)' }} />
-      </div>
-    </section>
-  );
-}
-
-// ─── Featured Products across all Movements ───────────────────────────────────
-function FeaturedProducts() {
-  const { products } = useProducts();
-  const featured = products.filter((p) => p.featured);
-
-  if (!products || products.length === 0) {
-    return null;
-  }
-
-  return (
-    <section style={{ padding: '96px 24px', background: '#FDFAF3' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <SectionHeader
-          eyebrow="Curated Atelier Highlights"
-          title="Masterpieces Across Movements"
-          subtitle="Discover hand-painted original canvases selected across Abstract Expressionism, Modernist Cubism, Royal Miniature, and Sacred Calligraphy."
-        />
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-          gap: '28px',
-        }}>
-          {featured.map((product, i) => (
-            <ProductCard key={product.id} product={product} index={i} />
-          ))}
-        </div>
-        <div style={{ textAlign: 'center', marginTop: '54px' }}>
-          <Link to="/gallery" style={{
-            display: 'inline-block',
-            padding: '16px 44px',
-            border: '1px solid #1A1A1A',
-            color: '#1A1A1A',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 600,
-            fontSize: '13px',
-            letterSpacing: '3px',
-            textTransform: 'uppercase',
-            textDecoration: 'none',
-            transition: 'background 0.3s, color 0.3s',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = '#1A1A1A';
-            e.currentTarget.style.color = '#ffffff';
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.color = '#1A1A1A';
-          }}>
-            View Complete Gallery →
-          </Link>
-        </div>
       </div>
     </section>
   );
@@ -848,7 +790,6 @@ export default function HomePage() {
   return (
     <div className="page-enter">
       <Hero />
-      <FeaturedProducts />
       <MovementsGrid />
       <ArtistStrip />
       <WhyUs />
