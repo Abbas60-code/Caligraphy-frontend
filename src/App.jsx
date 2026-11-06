@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ProductProvider } from './context/ProductContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import CartDrawer from './components/CartDrawer';
 import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
@@ -28,6 +29,7 @@ function Layout({ children, hideFooter }) {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <ProductProvider>
           <CartProvider>
