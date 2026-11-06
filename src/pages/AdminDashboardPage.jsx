@@ -189,7 +189,7 @@ export default function AdminDashboardPage({ onLogout }) {
   const averageOrderVal = orders.length > 0 ? (totalSales / orders.length).toFixed(0) : 0;
 
   return (
-    <div style={{ background: '#121212', minHeight: '100vh', color: '#ffffff', fontFamily: 'Inter, sans-serif' }}>
+    <div style={{ background: '#121212', minHeight: '100vh', color: '#ffffff', fontFamily: 'Inter, sans-serif', overflowX: 'hidden', maxWidth: '100vw' }}>
       {/* Mobile Top Header Bar */}
       <div className="admin-mobile-header" style={{
         display: 'none',
@@ -299,6 +299,7 @@ export default function AdminDashboardPage({ onLogout }) {
         minHeight: '100vh',
         width: '100%',
         maxWidth: '100vw',
+        overflowX: 'hidden',
         background: '#121212',
         color: '#ffffff',
         fontFamily: 'Inter, sans-serif',
@@ -421,8 +422,7 @@ export default function AdminDashboardPage({ onLogout }) {
         <main className="admin-main-padding" style={{
           padding: '36px 32px',
           overflowY: 'auto',
-          overflowX: 'auto',
-          WebkitOverflowScrolling: 'touch',
+          overflowX: 'hidden',
           maxHeight: '100vh',
           minWidth: 0,
           width: '100%',
@@ -1280,6 +1280,7 @@ export default function AdminDashboardPage({ onLogout }) {
         @media (max-width: 900px) {
           .admin-layout {
             grid-template-columns: 1fr !important;
+            overflow-x: hidden !important;
           }
           .admin-sidebar-desktop {
             display: none !important;
@@ -1289,6 +1290,7 @@ export default function AdminDashboardPage({ onLogout }) {
           }
           .admin-main-padding {
             padding: 20px 16px !important;
+            overflow-x: hidden !important;
           }
           .admin-header-flex {
             flex-direction: column !important;
