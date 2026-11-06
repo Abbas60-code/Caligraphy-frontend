@@ -5,12 +5,54 @@ export const products = [];
 
 // ─── Art Categories (used by GalleryPage & HomePage filters) ─────────────────
 export const categories = [
-  { id: 'all', label: 'All Works', arabic: 'جميع الأعمال' },
-  { id: 'calligraphy', label: 'Calligraphy', arabic: 'الخط العربي' },
-  { id: 'abstract', label: 'Abstract', arabic: 'تجريدي' },
-  { id: 'cubism', label: 'Cubism', arabic: 'تكعيبي' },
-  { id: 'miniature', label: 'Miniature', arabic: 'مصغرات' },
-  { id: 'modern-fusion', label: 'Modern Fusion', arabic: 'المزج المعاصر' },
+  {
+    id: 'all',
+    label: 'All Works',
+    arabic: 'جميع الأعمال',
+    subtitle: 'Complete Atelier',
+    description: 'Explore the full spectrum of original masterworks created across all fine art movements.',
+    image: '/calligraphy_allah.png',
+  },
+  {
+    id: 'calligraphy',
+    label: 'Calligraphy',
+    arabic: 'الخط العربي',
+    subtitle: 'Sacred Islamic Script',
+    description: 'Classical Thuluth, Diwani, and Naskh scripts rendered with genuine 24-karat gold leaf.',
+    image: '/calligraphy_allah.png',
+  },
+  {
+    id: 'abstract',
+    label: 'Abstract',
+    arabic: 'تجريدي',
+    subtitle: 'Expression & Texture',
+    description: 'Gestural canvases capturing pure emotion, rich textural impasto, and luminous oil tones.',
+    image: '/art/0d46b64eeeb730ae9051b8b5afd24924.jpg',
+  },
+  {
+    id: 'cubism',
+    label: 'Cubism',
+    arabic: 'تكعيبي',
+    subtitle: 'Geometry & Planes',
+    description: 'Deconstructed forms, multifaceted architectural planes, and dynamic chiaroscuro rhythms.',
+    image: '/art/2de1289a41c9897deddc6a0e82ddfb5a.jpg',
+  },
+  {
+    id: 'miniature',
+    label: 'Miniature',
+    arabic: 'مصغرات',
+    subtitle: 'Heritage Detailing',
+    description: 'Classical Mughal and Persian miniatures painted with single-hair brushes on archival wasli.',
+    image: '/art/4b283e3e87631b9887cd07b0525bac2e.jpg',
+  },
+  {
+    id: 'modern-fusion',
+    label: 'Modern Fusion',
+    arabic: 'المزج المعاصر',
+    subtitle: 'Contemporary Dialogue',
+    description: 'Contemporary harmonization blending eastern aesthetics, spiritual grace, and modern scale.',
+    image: '/calligraphy_modern.png',
+  },
 ];
 
 // ─── Testimonials (used by HomePage) ─────────────────────────────────────────

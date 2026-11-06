@@ -444,11 +444,12 @@ function MovementsGrid() {
                       {cat.subtitle}
                     </span>
                     <span style={{
-                      color: 'rgba(255,255,255,0.4)',
-                      fontSize: '11px',
-                      fontFamily: 'Inter, sans-serif',
+                      color: '#C9A84C',
+                      fontSize: '14px',
+                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      fontStyle: 'italic',
                     }}>
-                      {cat.count} Pieces
+                      {cat.arabic}
                     </span>
                   </div>
 
