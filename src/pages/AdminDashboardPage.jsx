@@ -418,7 +418,16 @@ export default function AdminDashboardPage({ onLogout }) {
         </aside>
 
         {/* Main Workspace */}
-        <main className="admin-main-padding" style={{ padding: '36px 32px', overflowY: 'auto', maxHeight: '100vh', minWidth: 0, width: '100%', boxSizing: 'border-box' }}>
+        <main className="admin-main-padding" style={{
+          padding: '36px 32px',
+          overflowY: 'auto',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          maxHeight: '100vh',
+          minWidth: 0,
+          width: '100%',
+          boxSizing: 'border-box',
+        }}>
           {/* Header */}
           <div className="admin-header-flex" style={{
             display: 'flex',
@@ -469,11 +478,11 @@ export default function AdminDashboardPage({ onLogout }) {
 
         {/* ---------------- OVERVIEW TAB ---------------- */}
         {activeTab === 'overview' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', minWidth: 0, width: '100%' }}>
             {/* Stats Cards */}
             <div className="admin-stats-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
               gap: '20px',
             }}>
               {[
@@ -502,7 +511,7 @@ export default function AdminDashboardPage({ onLogout }) {
             </div>
 
             {/* Quick Lists */}
-            <div className="admin-cards-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+            <div className="admin-cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
               {/* Recent Orders */}
               <div style={{ background: '#1A1A1A', padding: '24px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
                 <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '18px', fontWeight: 700, marginBottom: '20px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '10px' }}>
