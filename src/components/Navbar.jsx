@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, isLoggedIn, logout } = useAuth();
+  const { itemCount, setIsCartOpen } = useCart();
   const location = useLocation();
   const navigate = useNavigate();
   const userMenuRef = useRef(null);
@@ -118,7 +120,40 @@ export default function Navbar() {
           </div>
 
           {/* Right Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+
+            {/* ── Cart Icon ── */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              style={{
+                position: 'relative', background: 'transparent', border: 'none',
+                cursor: 'pointer', padding: '6px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s',
+              }}
+              title="Open Cart"
+              onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
+              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}
+            >
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              {itemCount > 0 && (
+                <span style={{
+                  position: 'absolute', top: '-2px', right: '-4px',
+                  background: '#C9A84C', color: '#1A1A1A',
+                  fontFamily: 'Inter, sans-serif', fontWeight: 800,
+                  fontSize: '10px', lineHeight: 1,
+                  minWidth: '18px', height: '18px',
+                  borderRadius: '50%',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: '0 3px',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                }}>
+                  {itemCount > 9 ? '9+' : itemCount}
+                </span>
+              )}
+            </button>
 
             {/* ── Auth Section ── */}
             {isLoggedIn ? (
