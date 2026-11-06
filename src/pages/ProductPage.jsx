@@ -1,18 +1,50 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { useProducts } from '../context/ProductContext';
 import { getOptimizedImageUrl } from '../utils/image';
+import { useCart } from '../context/CartContext';
 
 export default function ProductPage() {
   const { id } = useParams();
   const { products } = useProducts();
+  const { addItem, setIsCartOpen } = useCart();
+  const navigate = useNavigate();
 
   const product = products.find((p) => String(p.id) === String(id) || String(p._id) === String(id));
   const related = products.filter((p) => String(p.id) !== String(id) && p.category === product?.category).slice(0, 4);
 
   const [activeImage, setActiveImage] = useState(0);
   const [zoomed, setZoomed] = useState(false);
+  const [cartAdded, setCartAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addItem({
+      id: product.id || product._id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      dimensions: product.dimensions,
+      availability: product.availability,
+    });
+    setCartAdded(true);
+    setIsCartOpen(true);
+    setTimeout(() => setCartAdded(false), 2500);
+  };
+
+  const handleBuyNow = () => {
+    if (!product) return;
+    addItem({
+      id: product.id || product._id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      dimensions: product.dimensions,
+      availability: product.availability,
+    });
+    navigate('/cart');
+  };
 
   if (!product) {
     return (
@@ -280,6 +312,74 @@ export default function ProductPage() {
 
             {/* Inquire CTAs */}
             <div style={{ marginBottom: '32px' }}>
+
+              {/* Add to Cart + Buy Now */}
+              <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+                <button
+                  onClick={handleAddToCart}
+                  style={{
+                    flex: 1,
+                    height: '56px',
+                    background: cartAdded ? '#22c55e' : '#C9A84C',
+                    color: cartAdded ? '#fff' : '#1A1A1A',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    boxShadow: '0 4px 16px rgba(201,168,76,0.25)',
+                  }}
+                  onMouseEnter={e => { if (!cartAdded) { e.currentTarget.style.background = '#b8963c'; } }}
+                  onMouseLeave={e => { if (!cartAdded) { e.currentTarget.style.background = '#C9A84C'; } }}
+                >
+                  {cartAdded ? (
+                    <>✓ Added to Cart!</>
+                  ) : (
+                    <>
+                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                      </svg>
+                      Add to Cart
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  style={{
+                    flex: 1,
+                    height: '56px',
+                    background: '#1A1A1A',
+                    color: '#C9A84C',
+                    border: '1px solid #C9A84C',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#C9A84C'; e.currentTarget.style.color = '#1A1A1A'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#1A1A1A'; e.currentTarget.style.color = '#C9A84C'; }}
+                >
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                  Buy Now
+                </button>
+              </div>
+
               <a
                 href={`https://wa.me/923002161412?text=${whatsappMsg}`}
                 target="_blank"

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getOptimizedImageUrl } from '../utils/image';
+import { useCart } from '../context/CartContext';
 
 function StarRating({ rating }) {
   return (
@@ -22,6 +23,39 @@ function StarRating({ rating }) {
 
 export default function ProductCard({ product, index = 0 }) {
   const [hovered, setHovered] = useState(false);
+  const [added, setAdded] = useState(false);
+  const { addItem, setIsCartOpen } = useCart();
+  const navigate = useNavigate();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem({
+      id: product.id || product._id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      dimensions: product.dimensions,
+      availability: product.availability,
+    });
+    setAdded(true);
+    setIsCartOpen(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
+  const handleBuyNow = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem({
+      id: product.id || product._id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      dimensions: product.dimensions,
+      availability: product.availability,
+    });
+    navigate('/cart');
+  };
 
   const movementLabel = product.artMovement || (
     product.category === 'arabic-calligraphy' || product.category === 'calligraphy' || product.category === 'allah-names' || product.category === 'quranic-verses' || product.category === 'modern-islamic'
@@ -69,30 +103,57 @@ export default function ProductCard({ product, index = 0 }) {
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'rgba(0,0,0,0.4)',
+              background: 'rgba(0,0,0,0.55)',
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
+              gap: '10px',
               opacity: hovered ? 1 : 0,
               transition: 'opacity 0.3s ease',
             }}
           >
-            <span
+            <button
+              onClick={handleAddToCart}
               style={{
-                padding: '12px 24px',
-                background: '#C9A84C',
+                padding: '11px 22px',
+                background: added ? '#22c55e' : '#C9A84C',
                 color: '#1A1A1A',
                 fontSize: '11px',
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: 700,
-                letterSpacing: '2.5px',
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
-                display: 'inline-block',
+                border: 'none',
+                cursor: 'pointer',
                 boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+                transition: 'background 0.3s',
+                width: '160px',
               }}
             >
-              View Artwork →
-            </span>
+              {added ? '✓ Added!' : '+ Add to Cart'}
+            </button>
+            <button
+              onClick={handleBuyNow}
+              style={{
+                padding: '11px 22px',
+                background: 'transparent',
+                color: '#fff',
+                fontSize: '11px',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 700,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                border: '1px solid rgba(255,255,255,0.7)',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                width: '160px',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#1A1A1A'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fff'; }}
+            >
+              Buy Now →
+            </button>
           </div>
 
           {/* Badges */}
