@@ -27,7 +27,7 @@ export const categories = [
     arabic: 'تجريدي',
     subtitle: 'Expression & Texture',
     description: 'Gestural canvases capturing pure emotion, rich textural impasto, and luminous oil tones.',
-    image: '/art/2_A.jpg',
+    image: 'https://res.cloudinary.com/locflbwf/image/upload/v1793961419/amir-calligraphy/paintings/o0huet5tjdfsrszcnsqz.jpg',
   },
   {
     id: 'cubism',
@@ -35,7 +35,7 @@ export const categories = [
     arabic: 'تكعيبي',
     subtitle: 'Geometry & Planes',
     description: 'Deconstructed forms, multifaceted architectural planes, and dynamic chiaroscuro rhythms.',
-    image: '/art/4b283e3e87631b9887cd07b0525bac2e.jpg',
+    image: 'https://res.cloudinary.com/locflbwf/image/upload/v1793963984/amir-calligraphy/paintings/ge048dxr6ogm8b0af0jn.jpg',
   },
   {
     id: 'arabic-calligraphy',

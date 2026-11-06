@@ -55,28 +55,34 @@ function SectionHeader({ eyebrow, title, subtitle, light = false }) {
 
 // ─── Hero Section with Multi-Movement Switcher ────────────────────────────────
 function Hero() {
+  const { products } = useProducts();
   const [loaded, setLoaded] = useState(false);
   const [activeMovement, setActiveMovement] = useState(0);
+
+  // Retrieve user's added artworks from MongoDB
+  const whiteLeader = products?.find(p => p.title?.toLowerCase().includes('leader'));
+  const fatiha = products?.find(p => p.title?.toLowerCase().includes('fatiha') || p.category === 'calligraphy');
+  const abstractArt = products?.find(p => p.title?.toLowerCase().includes('kun') || p.title?.toLowerCase().includes('silence') || p.category === 'abstract');
 
   const heroMovements = [
     {
       name: "Classical Calligraphy",
-      tagline: "Illuminated Sacred Scripts & Verses",
-      image: "/art/46d9829041783dcd9374ace83f7957a6.jpg",
+      tagline: fatiha?.title || "Illuminated Sacred Scripts & Verses",
+      image: fatiha?.image || "https://res.cloudinary.com/locflbwf/image/upload/v1793964555/amir-calligraphy/paintings/yyglbzaagks926nqh91e.jpg",
       category: "calligraphy",
       accent: "#C9A84C",
     },
     {
       name: "Modernist Cubism",
-      tagline: "Kinetic Velocity & Dynamic Planes",
-      image: "/art/4b283e3e87631b9887cd07b0525bac2e.jpg",
+      tagline: whiteLeader?.title || "Kinetic Velocity & Dynamic Planes",
+      image: whiteLeader?.image || "https://res.cloudinary.com/locflbwf/image/upload/v1793963984/amir-calligraphy/paintings/ge048dxr6ogm8b0af0jn.jpg",
       category: "cubism",
       accent: "#E5A93C",
     },
     {
       name: "Abstract Expressionism",
-      tagline: "Figurative Abstraction & Emotional Depth",
-      image: "/art/2_A.jpg",
+      tagline: abstractArt?.title || "Figurative Abstraction & Emotional Depth",
+      image: abstractArt?.image || "https://res.cloudinary.com/locflbwf/image/upload/v1793961419/amir-calligraphy/paintings/o0huet5tjdfsrszcnsqz.jpg",
       category: "abstract",
       accent: "#D4AF37",
     },
