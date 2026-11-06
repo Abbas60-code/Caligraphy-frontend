@@ -111,14 +111,14 @@ export default function CartPage() {
             <span style={{ color: '#C9A84C' }}>Cart</span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+          <div className="cart-header-row" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <p style={{ fontSize: '10px', letterSpacing: '5px', textTransform: 'uppercase', color: '#C9A84C', marginBottom: '8px', fontWeight: 700 }}>
                 Your Selection
               </p>
-              <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, color: '#fff', lineHeight: 1.1 }}>
+              <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(26px, 5vw, 52px)', fontWeight: 700, color: '#fff', lineHeight: 1.1 }}>
                 Shopping Cart
-                <span style={{ fontSize: '18px', color: 'rgba(255,255,255,0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 400, marginLeft: '14px' }}>
+                <span style={{ fontSize: '16px', color: 'rgba(255,255,255,0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 400, marginLeft: '12px' }}>
                   ({items.length} {items.length === 1 ? 'piece' : 'pieces'})
                 </span>
               </h1>
@@ -145,15 +145,16 @@ export default function CartPage() {
       </div>
 
       {/* ── Main Content ── */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 24px' }}>
+      <div className="cart-content-padding" style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 24px' }}>
         <div className="cart-layout">
 
           {/* ── LEFT: Items ── */}
-          <div>
+          <div style={{ minWidth: 0, width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {items.map((item) => (
                 <div
                   key={item.id}
+                  className="cart-item-card"
                   style={{
                     background: removing === item.id ? '#fff5f5' : '#fff',
                     border: '1px solid #E8DFC8',
@@ -166,11 +167,12 @@ export default function CartPage() {
                     opacity: removing === item.id ? 0 : 1,
                     transform: removing === item.id ? 'translateX(20px)' : 'translateX(0)',
                     boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                    boxSizing: 'border-box',
                   }}
                 >
                   {/* Artwork Image */}
                   <Link to={`/product/${item.id}`} style={{ flexShrink: 0 }}>
-                    <div style={{
+                    <div className="cart-item-image" style={{
                       width: '100px', height: '120px',
                       border: '1px solid #E8DFC8',
                       overflow: 'hidden', background: '#F5EFE0',
@@ -189,9 +191,10 @@ export default function CartPage() {
                   </Link>
 
                   {/* Item Info */}
-                  <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className="cart-item-info" style={{ flex: 1, minWidth: 0 }}>
                     <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
                       <h3
+                        className="cart-item-title"
                         style={{
                           fontFamily: "'Playfair Display', Georgia, serif",
                           fontSize: '18px', fontWeight: 600, color: '#1A1A1A',
@@ -208,7 +211,7 @@ export default function CartPage() {
                     </p>
 
                     {/* Qty + Price */}
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                    <div className="cart-qty-price" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
                       {/* Qty Stepper */}
                       <div style={{
                         display: 'flex', alignItems: 'center',
@@ -244,7 +247,7 @@ export default function CartPage() {
 
                       {/* Price */}
                       <div style={{ textAlign: 'right' }}>
-                        <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '28px', fontWeight: 700, color: '#1A1A1A', lineHeight: 1 }}>
+                        <p className="cart-item-price" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '28px', fontWeight: 700, color: '#1A1A1A', lineHeight: 1 }}>
                           ${(item.price * item.quantity).toFixed(0)}
                         </p>
                         {item.quantity > 1 && (
@@ -281,7 +284,7 @@ export default function CartPage() {
             <div style={{
               marginTop: '24px',
               background: '#fff', border: '1px solid #E8DFC8',
-              padding: '28px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+              padding: '24px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" strokeWidth={1.5}>
@@ -310,7 +313,7 @@ export default function CartPage() {
                 </div>
               ) : (
                 <div>
-                  <div style={{ display: 'flex', gap: '0' }}>
+                  <div className="coupon-flex" style={{ display: 'flex', gap: '0' }}>
                     <input
                       value={couponVal}
                       onChange={e => { setCouponVal(e.target.value); setCouponError(''); }}
@@ -323,6 +326,7 @@ export default function CartPage() {
                         borderRight: 'none',
                         color: '#1A1A1A', fontFamily: 'Inter, sans-serif', fontSize: '13px',
                         outline: 'none',
+                        minWidth: 0,
                       }}
                       onFocus={e => e.target.style.borderColor = '#C9A84C'}
                       onBlur={e => e.target.style.borderColor = '#D4C4A0'}
@@ -369,11 +373,12 @@ export default function CartPage() {
           </div>
 
           {/* ── RIGHT: Order Summary ── */}
-          <div style={{ position: 'sticky', top: '100px' }}>
+          <div className="cart-summary-sticky" style={{ position: 'sticky', top: '100px', width: '100%' }}>
             <div style={{
               background: '#fff', border: '1px solid #E8DFC8',
               borderTop: '3px solid #C9A84C',
               boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+              boxSizing: 'border-box',
             }}>
               {/* Summary Header */}
               <div style={{ padding: '24px 28px', borderBottom: '1px solid #E8DFC8' }}>
@@ -530,10 +535,69 @@ export default function CartPage() {
           align-items: start;
         }
         @media (max-width: 1024px) {
-          .cart-layout { grid-template-columns: 1fr 320px; }
+          .cart-layout {
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+          }
         }
         @media (max-width: 768px) {
-          .cart-layout { grid-template-columns: 1fr; }
+          .cart-layout {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          .cart-content-padding {
+            padding: 24px 16px !important;
+          }
+          .cart-item-card {
+            padding: 18px 16px !important;
+            gap: 16px !important;
+          }
+          .cart-summary-sticky {
+            position: static !important;
+            top: auto !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .cart-content-padding {
+            padding: 20px 12px !important;
+          }
+          .cart-item-card {
+            padding: 14px 12px !important;
+            gap: 12px !important;
+          }
+          .cart-item-image {
+            width: 72px !important;
+            height: 88px !important;
+          }
+          .cart-item-title {
+            font-size: 15px !important;
+            margin-bottom: 4px !important;
+          }
+          .cart-item-price {
+            font-size: 20px !important;
+          }
+          .cart-item-info {
+            min-width: 0 !important;
+          }
+          .cart-qty-price {
+            gap: 8px !important;
+          }
+          .coupon-flex {
+            flex-direction: column !important;
+          }
+          .coupon-flex input {
+            border-right: 1px solid #D4C4A0 !important;
+            border-bottom: none !important;
+            border-radius: 0 !important;
+          }
+          .coupon-flex button {
+            width: 100% !important;
+          }
+          .cart-header-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
         }
       `}</style>
     </div>
