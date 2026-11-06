@@ -11,7 +11,7 @@ export const categories = [
     arabic: 'جميع الأعمال',
     subtitle: 'Complete Atelier',
     description: 'Explore the full spectrum of original masterworks created across all fine art movements.',
-    image: '/calligraphy_allah.png',
+    image: '/art/46d9829041783dcd9374ace83f7957a6.jpg',
   },
   {
     id: 'calligraphy',
@@ -19,7 +19,7 @@ export const categories = [
     arabic: 'الخط العربي',
     subtitle: 'Sacred Islamic Script',
     description: 'Classical Thuluth, Diwani, and Naskh scripts rendered with genuine 24-karat gold leaf.',
-    image: '/calligraphy_allah.png',
+    image: '/art/46d9829041783dcd9374ace83f7957a6.jpg',
   },
   {
     id: 'abstract',
@@ -27,7 +27,7 @@ export const categories = [
     arabic: 'تجريدي',
     subtitle: 'Expression & Texture',
     description: 'Gestural canvases capturing pure emotion, rich textural impasto, and luminous oil tones.',
-    image: '/calligraphy_ayatul_kursi.png',
+    image: '/art/2_A.jpg',
   },
   {
     id: 'cubism',
@@ -35,7 +35,7 @@ export const categories = [
     arabic: 'تكعيبي',
     subtitle: 'Geometry & Planes',
     description: 'Deconstructed forms, multifaceted architectural planes, and dynamic chiaroscuro rhythms.',
-    image: '/calligraphy_bismillah.png',
+    image: '/art/4b283e3e87631b9887cd07b0525bac2e.jpg',
   },
   {
     id: 'miniature',
@@ -43,7 +43,7 @@ export const categories = [
     arabic: 'مصغرات',
     subtitle: 'Heritage Detailing',
     description: 'Classical Mughal and Persian miniatures painted with single-hair brushes on archival wasli.',
-    image: '/calligraphy_ayatul_kursi.png',
+    image: '/art/0d46b64eeeb730ae9051b8b5afd24924.jpg',
   },
   {
     id: 'modern-fusion',
@@ -51,7 +51,7 @@ export const categories = [
     arabic: 'المزج المعاصر',
     subtitle: 'Contemporary Dialogue',
     description: 'Contemporary harmonization blending eastern aesthetics, spiritual grace, and modern scale.',
-    image: '/calligraphy_modern.png',
+    image: '/art/53c237adaaa8c1d584e5e5e5ee598224.jpg',
   },
   {
     id: 'arabic-calligraphy',
@@ -59,7 +59,7 @@ export const categories = [
     arabic: 'الخط العربي الكلاسيكي',
     subtitle: 'Classical Arabic',
     description: 'Classical Arabic calligraphy traditions and sacred verses.',
-    image: '/calligraphy_allah.png',
+    image: '/art/0aa0188c3716703e0c1769ae8084b481.jpg',
   },
 ];
 
