@@ -299,7 +299,6 @@ export default function AdminDashboardPage({ onLogout }) {
         minHeight: '100vh',
         width: '100%',
         maxWidth: '100vw',
-        overflowX: 'hidden',
         background: '#121212',
         color: '#ffffff',
         fontFamily: 'Inter, sans-serif',
@@ -587,9 +586,76 @@ export default function AdminDashboardPage({ onLogout }) {
 
         {/* ---------------- CATALOG TAB ---------------- */}
         {activeTab === 'catalog' && (
-          <div style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '4px', overflow: 'hidden' }}>
-            <div className="admin-table-container" style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-              <table style={{ width: '100%', minWidth: '720px', borderCollapse: 'separate', borderSpacing: 0, textAlign: 'left' }}>
+          <div style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '4px' }}>
+            {/* Scroll Navigation Controls for Table */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '12px 18px',
+              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              background: 'rgba(255,255,255,0.02)',
+              flexWrap: 'wrap',
+              gap: '10px',
+            }}>
+              <span style={{ fontSize: '12px', color: '#C9A84C', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'Inter, sans-serif' }}>
+                <span>⇄</span>
+                <span>Scroll or swipe horizontally to view all columns & actions</span>
+              </span>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById('admin-catalog-scroll');
+                    if (el) el.scrollBy({ left: -240, behavior: 'smooth' });
+                  }}
+                  style={{
+                    padding: '6px 12px',
+                    background: '#242424',
+                    border: '1px solid rgba(201,168,76,0.25)',
+                    color: '#C9A84C',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    borderRadius: '2px',
+                    fontWeight: 600,
+                  }}
+                >
+                  ◀ Scroll Left
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById('admin-catalog-scroll');
+                    if (el) el.scrollBy({ left: 240, behavior: 'smooth' });
+                  }}
+                  style={{
+                    padding: '6px 12px',
+                    background: '#242424',
+                    border: '1px solid rgba(201,168,76,0.25)',
+                    color: '#C9A84C',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    borderRadius: '2px',
+                    fontWeight: 600,
+                  }}
+                >
+                  Scroll Right ▶
+                </button>
+              </div>
+            </div>
+
+            <div
+              id="admin-catalog-scroll"
+              className="admin-table-container"
+              style={{
+                width: '100%',
+                overflowX: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                touchAction: 'pan-x pan-y',
+                paddingBottom: '8px',
+              }}
+            >
+              <table style={{ width: '100%', minWidth: '840px', borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}>
                     <th style={{
@@ -598,35 +664,25 @@ export default function AdminDashboardPage({ onLogout }) {
                       textTransform: 'uppercase',
                       color: 'rgba(255,255,255,0.45)',
                       letterSpacing: '1px',
-                      position: 'sticky',
-                      left: 0,
-                      background: '#1D1D1D',
-                      zIndex: 10,
                       minWidth: '220px',
-                      boxShadow: '3px 0 8px rgba(0,0,0,0.4)',
                     }}>
                       Painting
                     </th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '140px' }}>Category</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '90px' }}>Price</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '90px' }}>Status</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '150px' }}>Category</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '100px' }}>Price</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '100px' }}>Status</th>
                     <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', minWidth: '100px' }}>Badges</th>
-                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', textAlign: 'right', minWidth: '120px' }}>Actions</th>
+                    <th style={{ padding: '14px 18px', fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', letterSpacing: '1px', textAlign: 'right', minWidth: '130px' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
                     <tr key={product.id || product._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'background 0.2s' }} className="hover:bg-white/[0.02]">
-                      {/* Image + Title — STICKY so it never scrolls out */}
+                      {/* Image + Title */}
                       <td style={{
                         padding: '14px 18px',
                         verticalAlign: 'middle',
-                        position: 'sticky',
-                        left: 0,
-                        background: '#1A1A1A',
-                        zIndex: 5,
                         minWidth: '220px',
-                        boxShadow: '3px 0 8px rgba(0,0,0,0.4)',
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                           <img
@@ -1183,6 +1239,35 @@ export default function AdminDashboardPage({ onLogout }) {
       )}
       {/* Responsive Layout Styles */}
       <style>{`
+        /* Custom visible scrollbar for admin table */
+        .admin-table-container::-webkit-scrollbar {
+          height: 10px !important;
+          display: block !important;
+        }
+        .admin-table-container::-webkit-scrollbar-track {
+          background: #141414 !important;
+          border-radius: 4px !important;
+        }
+        .admin-table-container::-webkit-scrollbar-thumb {
+          background: #C9A84C !important;
+          border-radius: 4px !important;
+          border: 2px solid #141414 !important;
+        }
+        .admin-table-container::-webkit-scrollbar-thumb:hover {
+          background: #E8C97A !important;
+        }
+
+        @media (max-width: 1024px) {
+          .admin-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .admin-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+        }
+
         @media (max-width: 900px) {
           .admin-layout {
             grid-template-columns: 1fr !important;
@@ -1200,6 +1285,13 @@ export default function AdminDashboardPage({ onLogout }) {
             flex-direction: column !important;
             align-items: flex-start !important;
             gap: 16px !important;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .admin-stats-grid {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
           }
         }
       `}</style>
