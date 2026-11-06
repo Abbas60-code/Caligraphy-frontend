@@ -33,6 +33,7 @@ export default function App() {
       <AuthProvider>
         <ProductProvider>
           <CartProvider>
+            <CartDrawer />
             <Routes>
               {/* Login — full screen */}
               <Route path="/login" element={<LoginPage />} />
