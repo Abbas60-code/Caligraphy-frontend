@@ -357,8 +357,11 @@ function MovementsGrid() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          gap: '24px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          justifyContent: 'center',
+          maxWidth: '1140px',
+          margin: '0 auto',
+          gap: '28px',
         }}>
           {displayCategories.map((cat, i) => (
             <Link
