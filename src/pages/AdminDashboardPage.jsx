@@ -27,7 +27,8 @@ export default function AdminDashboardPage({ onLogout }) {
     originalPrice: '',
     category: 'abstract',
     image: '',
-    imageFile: null,
+    imageFiles: [],
+    existingImages: [],
     description: '',
     dimensions: '',
     materials: '',
@@ -60,7 +61,8 @@ export default function AdminDashboardPage({ onLogout }) {
       originalPrice: '',
       category: 'abstract',
       image: '', 
-      imageFile: null,
+      imageFiles: [],
+      existingImages: [],
       description: '',
       dimensions: '50 × 70 cm',
       materials: 'Archival canvas, gold leaf, handmade inks',
@@ -74,6 +76,10 @@ export default function AdminDashboardPage({ onLogout }) {
 
   const handleOpenEditModal = (product) => {
     setEditingProduct(product);
+    const existing = product.images && product.images.length > 0
+      ? product.images
+      : (product.image ? [product.image] : []);
+
     setForm({
       title: product.title,
       arabicTitle: product.arabicTitle || '',
@@ -81,7 +87,8 @@ export default function AdminDashboardPage({ onLogout }) {
       originalPrice: product.originalPrice || '',
       category: product.category,
       image: product.image,
-      imageFile: null,
+      imageFiles: [],
+      existingImages: existing,
       description: product.description || '',
       dimensions: product.dimensions || '',
       materials: product.materials || '',
@@ -91,6 +98,30 @@ export default function AdminDashboardPage({ onLogout }) {
       tags: product.tags && Array.isArray(product.tags) ? product.tags.join(', ') : '',
     });
     setShowFormModal(true);
+  };
+
+  const handleFilesChange = (e) => {
+    const selected = Array.from(e.target.files || []);
+    if (selected.length > 0) {
+      setForm((prev) => ({
+        ...prev,
+        imageFiles: [...prev.imageFiles, ...selected],
+      }));
+    }
+  };
+
+  const handleRemoveNewFile = (idx) => {
+    setForm((prev) => ({
+      ...prev,
+      imageFiles: prev.imageFiles.filter((_, i) => i !== idx),
+    }));
+  };
+
+  const handleRemoveExistingImage = (idx) => {
+    setForm((prev) => ({
+      ...prev,
+      existingImages: prev.existingImages.filter((_, i) => i !== idx),
+    }));
   };
 
   const handleFormSubmit = (e) => {
@@ -113,8 +144,20 @@ export default function AdminDashboardPage({ onLogout }) {
         tagsArr.forEach(t => formData.append('tags[]', t));
     }
     
-    if (form.imageFile) {
-        formData.append('image', form.imageFile);
+    // Multiple image files
+    if (form.imageFiles && form.imageFiles.length > 0) {
+      form.imageFiles.forEach((file) => {
+        formData.append('images', file);
+      });
+      // Primary cover file for legacy compatibility
+      formData.append('image', form.imageFiles[0]);
+    }
+
+    // Remaining existing images kept by user
+    if (form.existingImages && form.existingImages.length > 0) {
+      form.existingImages.forEach((imgUrl) => {
+        formData.append('existingImages[]', imgUrl);
+      });
     }
 
     if (editingProduct) {
@@ -966,21 +1009,71 @@ export default function AdminDashboardPage({ onLogout }) {
                 </div>
               </div>
 
-              {/* Image Path / Upload */}
+              {/* Multiple Images Upload & Preview */}
               <div>
-                <label style={{ display: 'block', fontSize: '11px', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Image Upload</label>
-                {editingProduct && form.image && (
-                  <div style={{ marginBottom: '10px' }}>
-                    <img src={getOptimizedImageUrl(form.image, 300)} alt="Current" loading="lazy" style={{ width: '80px', height: '80px', objectFit: 'cover', border: '1px solid #333' }} />
+                <label style={{ display: 'block', fontSize: '11px', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
+                  Artwork Images (Select One or Multiple Photos)
+                </label>
+
+                {/* Previews: Existing + Newly Selected Images */}
+                {((form.existingImages && form.existingImages.length > 0) || (form.imageFiles && form.imageFiles.length > 0)) && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '14px', padding: '12px', background: '#1c1c1c', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '4px' }}>
+                    {/* Existing Images */}
+                    {form.existingImages.map((imgUrl, idx) => (
+                      <div key={`existing-${idx}`} style={{ position: 'relative', width: '84px', height: '84px', border: idx === 0 ? '2px solid #C9A84C' : '1px solid #444', borderRadius: '3px', overflow: 'hidden', background: '#111' }}>
+                        <img src={getOptimizedImageUrl(imgUrl, 200)} alt="Existing" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        {idx === 0 && (
+                          <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(201,168,76,0.95)', color: '#111', fontSize: '9px', fontWeight: 700, textAlign: 'center', padding: '1px 0', letterSpacing: '0.5px' }}>
+                            COVER
+                          </span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveExistingImage(idx)}
+                          style={{ position: 'absolute', top: '2px', right: '2px', background: 'rgba(0,0,0,0.8)', color: '#ff4d4f', border: 'none', borderRadius: '50%', width: '18px', height: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 'bold' }}
+                          title="Remove image"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+
+                    {/* New Selected Files */}
+                    {form.imageFiles.map((file, idx) => {
+                      const isFirstCover = form.existingImages.length === 0 && idx === 0;
+                      return (
+                        <div key={`new-${idx}`} style={{ position: 'relative', width: '84px', height: '84px', border: isFirstCover ? '2px solid #C9A84C' : '1px dashed #C9A84C', borderRadius: '3px', overflow: 'hidden', background: '#111' }}>
+                          <img src={URL.createObjectURL(file)} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          {isFirstCover && (
+                            <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(201,168,76,0.95)', color: '#111', fontSize: '9px', fontWeight: 700, textAlign: 'center', padding: '1px 0', letterSpacing: '0.5px' }}>
+                              COVER
+                            </span>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveNewFile(idx)}
+                            style={{ position: 'absolute', top: '2px', right: '2px', background: 'rgba(0,0,0,0.8)', color: '#ff4d4f', border: 'none', borderRadius: '50%', width: '18px', height: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 'bold' }}
+                            title="Remove image"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
+
                 <input
                   id="modal-image"
                   type="file"
+                  multiple
                   accept="image/*"
-                  onChange={(e) => setForm({ ...form, imageFile: e.target.files[0] })}
-                  style={{ width: '100%', border: '1px solid rgba(255,255,255,0.1)', background: '#222', padding: '10px 14px', color: '#fff', fontSize: '14px', boxSizing: 'border-box' }}
+                  onChange={handleFilesChange}
+                  style={{ width: '100%', border: '1px solid rgba(255,255,255,0.15)', background: '#222', padding: '10px 14px', color: '#fff', fontSize: '13px', boxSizing: 'border-box', cursor: 'pointer' }}
                 />
+                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '11px', marginTop: '6px', margin: '6px 0 0' }}>
+                  💡 Tip: You can select multiple images at once (or pick more by clicking Choose Files again). The first image will be used as the primary cover picture.
+                </p>
               </div>
 
               {/* Description */}
