@@ -299,7 +299,6 @@ export default function AdminDashboardPage({ onLogout }) {
         minHeight: '100vh',
         width: '100%',
         maxWidth: '100vw',
-        overflowX: 'hidden',
         background: '#121212',
         color: '#ffffff',
         fontFamily: 'Inter, sans-serif',
@@ -421,12 +420,10 @@ export default function AdminDashboardPage({ onLogout }) {
         {/* Main Workspace */}
         <main className="admin-main-padding" style={{
           padding: '36px 32px',
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          maxHeight: '100vh',
           minWidth: 0,
           width: '100%',
           boxSizing: 'border-box',
+          flex: 1,
         }}>
           {/* Header */}
           <div className="admin-header-flex" style={{
@@ -1290,7 +1287,6 @@ export default function AdminDashboardPage({ onLogout }) {
           }
           .admin-main-padding {
             padding: 20px 16px !important;
-            overflow-x: hidden !important;
           }
           .admin-header-flex {
             flex-direction: column !important;
