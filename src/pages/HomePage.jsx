@@ -100,13 +100,13 @@ function Hero() {
   return (
     <section style={{
       position: 'relative',
-      minHeight: '100vh',
+      minHeight: 'clamp(500px, 72vh, 680px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
-      paddingTop: '60px',
-      paddingBottom: '40px',
+      paddingTop: '80px',
+      paddingBottom: '36px',
     }}>
       {/* Background Image with Cross-fade transition */}
       <div
@@ -137,19 +137,19 @@ function Hero() {
         zIndex: 10,
         textAlign: 'center',
         padding: '0 24px',
-        maxWidth: '1000px',
+        maxWidth: '920px',
         margin: '0 auto',
         width: '100%',
       }}>
         {/* Eyebrow */}
         <p style={{
           color: '#C9A84C',
-          fontSize: '12px',
-          letterSpacing: '8px',
+          fontSize: '11px',
+          letterSpacing: '6px',
           textTransform: 'uppercase',
           fontFamily: 'Inter, sans-serif',
           fontWeight: 600,
-          marginBottom: '20px',
+          marginBottom: '14px',
           opacity: loaded ? 1 : 0,
           transform: loaded ? 'translateY(0)' : 'translateY(16px)',
           transition: 'opacity 0.9s ease, transform 0.9s ease',
@@ -160,11 +160,11 @@ function Hero() {
         {/* Main Headline */}
         <h1 style={{
           fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: 'clamp(34px, 6.5vw, 76px)',
+          fontSize: 'clamp(28px, 4.8vw, 56px)',
           fontWeight: 800,
           color: '#ffffff',
-          lineHeight: 1.15,
-          marginBottom: '24px',
+          lineHeight: 1.18,
+          marginBottom: '16px',
           opacity: loaded ? 1 : 0,
           transform: loaded ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 1s ease 0.2s, transform 1s ease 0.2s',
@@ -176,11 +176,11 @@ function Hero() {
         {/* Subtitle */}
         <p style={{
           color: 'rgba(255,255,255,0.78)',
-          fontSize: 'clamp(15px, 2vw, 19px)',
+          fontSize: 'clamp(14px, 1.6vw, 17px)',
           fontFamily: 'Inter, sans-serif',
-          lineHeight: 1.75,
-          maxWidth: '720px',
-          margin: '0 auto 36px',
+          lineHeight: 1.65,
+          maxWidth: '680px',
+          margin: '0 auto 24px',
           opacity: loaded ? 1 : 0,
           transform: loaded ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 1s ease 0.35s, transform 1s ease 0.35s',
@@ -192,21 +192,21 @@ function Hero() {
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '16px',
+          gap: '14px',
           justifyContent: 'center',
-          marginBottom: '48px',
+          marginBottom: '28px',
           opacity: loaded ? 1 : 0,
           transform: loaded ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 1s ease 0.5s, transform 1s ease 0.5s',
         }}>
           <Link to="/gallery" id="hero-shop-btn" className="btn-ripple" style={{
-            padding: '16px 40px',
+            padding: '13px 32px',
             background: '#C9A84C',
             color: '#1A1A1A',
             fontFamily: 'Inter, sans-serif',
             fontWeight: 700,
-            fontSize: '13px',
-            letterSpacing: '3px',
+            fontSize: '12px',
+            letterSpacing: '2.5px',
             textTransform: 'uppercase',
             textDecoration: 'none',
             display: 'inline-block',
@@ -215,15 +215,15 @@ function Hero() {
             Explore All Collections
           </Link>
           <Link to="/contact" id="hero-custom-btn" style={{
-            padding: '16px 40px',
+            padding: '13px 32px',
             border: '1px solid rgba(255,255,255,0.5)',
             background: 'rgba(0,0,0,0.3)',
             backdropFilter: 'blur(8px)',
             color: '#ffffff',
             fontFamily: 'Inter, sans-serif',
             fontWeight: 500,
-            fontSize: '13px',
-            letterSpacing: '3px',
+            fontSize: '12px',
+            letterSpacing: '2.5px',
             textTransform: 'uppercase',
             textDecoration: 'none',
             display: 'inline-block',
@@ -252,11 +252,11 @@ function Hero() {
                   background: isActive ? 'rgba(201,168,76,0.22)' : 'rgba(255,255,255,0.06)',
                   border: isActive ? '1px solid #C9A84C' : '1px solid rgba(255,255,255,0.15)',
                   backdropFilter: 'blur(10px)',
-                  padding: '10px 16px',
+                  padding: '8px 14px',
                   borderRadius: '2px',
                   color: isActive ? '#C9A84C' : 'rgba(255,255,255,0.75)',
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '12px',
+                  fontSize: '11px',
                   letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   fontWeight: isActive ? 700 : 500,
@@ -273,22 +273,6 @@ function Hero() {
             );
           })}
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute',
-        bottom: '24px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '6px',
-        zIndex: 10,
-      }} className="animate-bounce">
-        <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>Explore</p>
-        <div style={{ width: '1px', height: '30px', background: 'linear-gradient(to bottom, #C9A84C, transparent)' }} />
       </div>
     </section>
   );
