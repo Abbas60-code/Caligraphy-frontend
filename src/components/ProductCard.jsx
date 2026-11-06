@@ -23,6 +23,20 @@ function StarRating({ rating }) {
 export default function ProductCard({ product, index = 0 }) {
   const [hovered, setHovered] = useState(false);
 
+  const movementLabel = product.artMovement || (
+    product.category === 'arabic-calligraphy' || product.category === 'calligraphy' || product.category === 'allah-names' || product.category === 'quranic-verses' || product.category === 'modern-islamic'
+      ? 'Calligraphy'
+      : product.category === 'abstract'
+      ? 'Abstract'
+      : product.category === 'cubism'
+      ? 'Cubism'
+      : product.category === 'miniature'
+      ? 'Miniature'
+      : product.category === 'modern-fusion'
+      ? 'Modern Fusion'
+      : 'Fine Art'
+  );
+
   return (
     <div
       className="card-hover group cursor-pointer"
@@ -36,7 +50,7 @@ export default function ProductCard({ product, index = 0 }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Link to={`/product/${product.id}`} style={{ display: 'block', textDecoration: 'none' }}>
+      <Link to={`/product/${product.id || product._id}`} style={{ display: 'block', textDecoration: 'none' }}>
         {/* Image Container */}
         <div
           className="img-zoom"
@@ -83,7 +97,7 @@ export default function ProductCard({ product, index = 0 }) {
 
           {/* Badges */}
           <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            {product.artMovement && (
+            {movementLabel && (
               <span style={{
                 background: '#1A1A1A',
                 color: '#C9A84C',
@@ -96,7 +110,7 @@ export default function ProductCard({ product, index = 0 }) {
                 letterSpacing: '1.5px',
                 backdropFilter: 'blur(4px)',
               }}>
-                {product.artMovement}
+                {movementLabel}
               </span>
             )}
             {product.originalPrice && (
@@ -173,7 +187,7 @@ export default function ProductCard({ product, index = 0 }) {
               fontFamily: 'Inter, sans-serif',
               fontWeight: 600,
             }}>
-              {product.artMovement || 'Fine Art'}
+              {movementLabel}
             </span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <StarRating rating={product.rating || 5} />
