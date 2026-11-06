@@ -139,7 +139,7 @@ export default function GalleryPage() {
             maxWidth: '680px',
             margin: 0,
           }}>
-            Curated original canvases spanning Sacred Islamic Calligraphy, Abstract Expressionism, Modernist Cubism, and fine Mughal Miniature art.
+            Curated original canvases spanning Sacred Islamic Calligraphy, Abstract Expressionism, and Modernist Cubism.
           </p>
 
           {/* Quick Filter Horizontal Scroll Bar */}

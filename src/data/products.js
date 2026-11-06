@@ -38,22 +38,6 @@ export const categories = [
     image: '/art/4b283e3e87631b9887cd07b0525bac2e.jpg',
   },
   {
-    id: 'miniature',
-    label: 'Miniature',
-    arabic: 'مصغرات',
-    subtitle: 'Heritage Detailing',
-    description: 'Classical Mughal and Persian miniatures painted with single-hair brushes on archival wasli.',
-    image: '/art/0d46b64eeeb730ae9051b8b5afd24924.jpg',
-  },
-  {
-    id: 'modern-fusion',
-    label: 'Modern Fusion',
-    arabic: 'المزج المعاصر',
-    subtitle: 'Contemporary Dialogue',
-    description: 'Contemporary harmonization blending eastern aesthetics, spiritual grace, and modern scale.',
-    image: '/art/53c237adaaa8c1d584e5e5e5ee598224.jpg',
-  },
-  {
     id: 'arabic-calligraphy',
     label: 'Arabic Calligraphy',
     arabic: 'الخط العربي الكلاسيكي',

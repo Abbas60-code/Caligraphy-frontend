@@ -47,7 +47,7 @@ export default function Footer() {
               fontSize: '15px',
               lineHeight: 1.7,
             }}>
-              Curating original fine art across Abstract Expressionism, Modernist Cubism, classical Miniature painting, and sacred Islamic Calligraphy. Hand-painted with archival excellence for international collectors.
+              Curating original fine art across Abstract Expressionism, Modernist Cubism, and sacred Islamic Calligraphy. Hand-painted with archival excellence for international collectors.
             </p>
           </div>
 
@@ -106,11 +106,9 @@ export default function Footer() {
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
+                { name: 'Islamic Calligraphy', id: 'calligraphy' },
                 { name: 'Abstract Expressionism', id: 'abstract' },
                 { name: 'Cubism & Geometry', id: 'cubism' },
-                { name: 'Miniature Painting', id: 'miniature' },
-                { name: 'Islamic Calligraphy', id: 'calligraphy' },
-                { name: 'Contemporary Fusion', id: 'modern-fusion' },
                 { name: 'Bespoke Commissions', id: 'custom' },
               ].map((cat) => (
                 <li key={cat.id}>

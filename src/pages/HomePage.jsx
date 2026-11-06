@@ -80,13 +80,6 @@ function Hero() {
       category: "abstract",
       accent: "#D4AF37",
     },
-    {
-      name: "Modern Fusion",
-      tagline: "Contemporary Dialogue & Spiritual Grace",
-      image: "/art/53c237adaaa8c1d584e5e5e5ee598224.jpg",
-      category: "modern-fusion",
-      accent: "#C9A84C",
-    },
   ];
 
   useEffect(() => {
@@ -177,7 +170,7 @@ function Hero() {
           transition: 'opacity 1s ease 0.2s, transform 1s ease 0.2s',
         }}>
           Transcending Canvases.<br />
-          <span className="gold-shimmer">Abstract · Cubism · Miniature · Calligraphy.</span>
+          <span className="gold-shimmer">Abstract · Cubism · Sacred Calligraphy.</span>
         </h1>
 
         {/* Subtitle */}
@@ -192,7 +185,7 @@ function Hero() {
           transform: loaded ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 1s ease 0.35s, transform 1s ease 0.35s',
         }}>
-          Welcome to the atelier of Amir. Explore an extraordinary visual dialogue bridging the tactile energy of Abstract Expressionism, avant-garde Cubist perspectives, the heritage precision of Mughal Miniatures, and the divine grace of Sacred Calligraphy.
+          Welcome to the atelier of Amir. Explore an extraordinary visual dialogue bridging the tactile energy of Abstract Expressionism, avant-garde Cubist perspectives, and the divine grace of Sacred Calligraphy.
         </p>
 
         {/* CTAs */}
@@ -321,7 +314,7 @@ function FeaturedArtworks() {
         <SectionHeader
           eyebrow="Curated Atelier Highlights"
           title="Masterpieces Across Movements"
-          subtitle="Discover hand-painted original canvases across Sacred Calligraphy, Abstract Expressionism, Modernist Cubism, and Royal Miniature art."
+          subtitle="Discover hand-painted original canvases across Sacred Calligraphy, Abstract Expressionism, and Modernist Cubism."
         />
         <div style={{
           display: 'grid',
@@ -346,14 +339,14 @@ function FeaturedArtworks() {
             textDecoration: 'none',
             transition: 'background 0.3s, color 0.3s',
           }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = '#1A1A1A';
-            e.currentTarget.style.color = '#ffffff';
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.color = '#1A1A1A';
-          }}>
+            onMouseEnter={e => {
+              e.currentTarget.style.background = '#1A1A1A';
+              e.currentTarget.style.color = '#ffffff';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = '#1A1A1A';
+            }}>
             Explore Complete Collection →
           </Link>
         </div>
@@ -785,7 +778,7 @@ function Newsletter() {
           Join The Collectors Circle
         </h2>
         <p style={{ color: '#6B5E52', fontFamily: 'Inter, sans-serif', fontSize: '16px', lineHeight: 1.75, marginBottom: '36px' }}>
-          Receive exclusive early previews of new Abstract canvases, Cubist releases, royal Miniature folios, and custom commission availability directly to your inbox.
+          Receive exclusive early previews of new Abstract canvases, Cubist releases, and custom commission availability directly to your inbox.
         </p>
 
         {submitted ? (
