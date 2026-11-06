@@ -80,12 +80,12 @@ export function ProductProvider({ children }) {
       const data = await res.json();
       if (data.success) {
         setMessages(data.data.map((m) => ({
-          id: m.id,
+          id: m._id || m.id,
           name: m.name,
           email: m.email,
           subject: m.subject || '',
           message: m.message,
-          date: m.created_at ? m.created_at.split('T')[0] : '',
+          date: m.createdAt ? m.createdAt.split('T')[0] : (m.created_at ? m.created_at.split('T')[0] : ''),
         })));
       }
     } catch (err) {
